@@ -1,0 +1,10 @@
+{
+  "title": "Help & Support",
+  "icon": "Headset",
+  "pages": [
+    "faq",
+    "community-interaction",
+    "feedback-issues",
+    "buy-us-a-coffee"
+  ]
+}

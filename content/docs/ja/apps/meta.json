@@ -1,0 +1,13 @@
+{
+  "title": "AI应用",
+  "icon": "Sparkles",
+  "pages": [
+    "cherry-studio",
+    "claude-code",
+    "codex-cli",
+    "factory-droid-cli",
+    "fluent-read",
+    "langbot",
+    "luna-translator"
+  ]
+}

@@ -1,4 +1,15 @@
 {
   "title": "文档",
-  "pages": ["index", "getting-started"]
+  "pages": [
+    "index",
+    "getting-started",
+    "installation",
+    "configuration",
+    "guide",
+    "wiki",
+    "api",
+    "apps",
+    "support",
+    "business-cooperation"
+  ]
 }

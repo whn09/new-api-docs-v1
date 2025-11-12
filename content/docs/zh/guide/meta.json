@@ -1,0 +1,5 @@
+{
+  "title": "使用指南",
+  "icon": "BookOpen",
+  "pages": ["home", "console", "pricing", "document", "about"]
+}

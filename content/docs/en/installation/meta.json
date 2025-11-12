@@ -1,0 +1,12 @@
+{
+  "title": "Installation Guide",
+  "icon": "Wrench",
+  "pages": [
+    "docker-compose-installation",
+    "docker-installation",
+    "1panel-installation",
+    "bt-docker-installation",
+    "cluster-deployment",
+    "local-development"
+  ]
+}

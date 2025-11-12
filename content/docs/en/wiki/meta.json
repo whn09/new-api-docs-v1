@@ -1,0 +1,12 @@
+{
+  "title": "Wiki",
+  "icon": "BookMarked",
+  "pages": [
+    "project-introduction",
+    "features-introduction",
+    "technical-architecture",
+    "analytics-setup",
+    "changelog",
+    "special-thanks"
+  ]
+}
