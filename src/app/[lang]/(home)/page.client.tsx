@@ -10,8 +10,10 @@ export function Hero() {
   const { resolvedTheme } = useTheme();
   const [showShaders, setShowShaders] = useState(false);
   const [imageReady, setImageReady] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Apply some delay, otherwise on slower devices, it errors with uniform images not being fully loaded.
     setTimeout(() => {
       setShowShaders(true);
@@ -80,7 +82,7 @@ export function Hero() {
           className="animate-fd-fade-in absolute duration-1000 max-lg:bottom-[-40%] max-lg:left-[-120px] lg:top-[5%] lg:right-[10%]"
         />
       )}
-      {resolvedTheme && (
+      {mounted && (
         <Image
           src={
             resolvedTheme === 'dark'
