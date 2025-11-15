@@ -1,12 +1,18 @@
 name: Auto Translate Documents
 
 on:
-  # 当推送到 main 分支的 content/docs/zh 目录时触发
+  # 当推送到 main 分支时触发
   push:
     branches: ['main']
     paths:
+      # 中文文档变更时触发
       - 'content/docs/zh/**/*.md'
       - 'content/docs/zh/**/*.mdx'
+      # 翻译文件被删除时也触发（用于自动补全）
+      - 'content/docs/en/**/*.md'
+      - 'content/docs/en/**/*.mdx'
+      - 'content/docs/ja/**/*.md'
+      - 'content/docs/ja/**/*.mdx'
 
   # 允许手动触发
   workflow_dispatch:
@@ -86,9 +92,40 @@ jobs:
             done
             
           else
-            # 正常模式：只翻译变更的文件
-            echo "📝 获取变更的中文文档..."
-            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep -E '^content/docs/zh/.*\.(md|mdx)$' || echo "")
+            # 正常模式：检测变更和缺失
+            echo "📝 检测变更和缺失的翻译..."
+            
+            # 1. 获取变更的中文文档
+            ZH_CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -E '^content/docs/zh/.*\.(md|mdx)$' || echo "")
+            
+            # 2. 获取被删除的翻译文件对应的中文源文件
+            DELETED_TRANSLATIONS=$(git diff --name-only HEAD~1 HEAD | grep -E '^content/docs/(en|ja)/.*\.(md|mdx)$' || echo "")
+            ZH_FROM_DELETED=""
+            
+            if [ ! -z "$DELETED_TRANSLATIONS" ]; then
+              echo "🗑️ 检测到翻译文件被删除:"
+              for trans_file in $DELETED_TRANSLATIONS; do
+                echo "  - $trans_file"
+                # 提取相对路径
+                if [[ $trans_file == content/docs/en/* ]]; then
+                  rel_path=${trans_file#content/docs/en/}
+                elif [[ $trans_file == content/docs/ja/* ]]; then
+                  rel_path=${trans_file#content/docs/ja/}
+                fi
+                
+                # 构建对应的中文源文件路径
+                zh_file="content/docs/zh/$rel_path"
+                
+                # 如果中文源文件存在，添加到待翻译列表
+                if [ -f "$zh_file" ]; then
+                  ZH_FROM_DELETED="$ZH_FROM_DELETED $zh_file"
+                  echo "  ✓ 找到对应的中文源文件: $zh_file"
+                fi
+              done
+            fi
+            
+            # 合并两个列表并去重
+            CHANGED_FILES=$(echo "$ZH_CHANGED $ZH_FROM_DELETED" | tr ' ' '\n' | sort -u | tr '\n' ' ')
           fi
 
           if [ -z "$CHANGED_FILES" ]; then
