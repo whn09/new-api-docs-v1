@@ -158,7 +158,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || 'gpt-4o-mini' }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || 'gemini-2.5-flash' }}
           MAX_RETRIES: ${{ secrets.MAX_RETRIES || '3' }}
           RETRY_DELAY: ${{ secrets.RETRY_DELAY || '2' }}
           RETRY_BACKOFF: ${{ secrets.RETRY_BACKOFF || '2.0' }}
