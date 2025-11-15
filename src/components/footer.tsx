@@ -114,7 +114,7 @@ const footerContent: Record<
         icon: <MessageCircle className="size-4" />,
       },
     ],
-    copyright: '© 2025 锟腾科技（杭州）有限公司. All Rights Reserved.',
+    copyright: '© 2025 锟腾科技. All Rights Reserved.',
     beian: [
       { text: '浙ICP备2025190188号-2', href: 'https://beian.miit.gov.cn/' },
       {
@@ -224,7 +224,7 @@ const footerContent: Record<
         icon: <MessageCircle className="size-4" />,
       },
     ],
-    copyright: '© 2025 Quantum Nous. All Rights Reserved.',
+    copyright: '© 2025 QuantumNous. All Rights Reserved.',
     beian: [
       { text: '浙ICP备2025190188号-2', href: 'https://beian.miit.gov.cn/' },
       {
@@ -334,7 +334,7 @@ const footerContent: Record<
         icon: <MessageCircle className="size-4" />,
       },
     ],
-    copyright: '© 2025 Quantum Nous. All Rights Reserved.',
+    copyright: '© 2025 QuantumNous. All Rights Reserved.',
     beian: [
       { text: '浙ICP备2025190188号-2', href: 'https://beian.miit.gov.cn/' },
       {
