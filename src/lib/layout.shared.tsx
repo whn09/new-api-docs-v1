@@ -1,5 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
-import { i18n, getLocalePath } from '@/lib/i18n';
+import { i18n } from '@/lib/i18n';
 import Image from 'next/image';
 import type { LinkItemType } from 'fumadocs-ui/layouts/docs';
 
@@ -23,18 +23,6 @@ export const linkItems: LinkItemType[] = [
   },
 ];
 
-const localeMap: Record<string, { docs: string }> = {
-  en: {
-    docs: 'Documentation',
-  },
-  zh: {
-    docs: '文档',
-  },
-  ja: {
-    docs: 'ドキュメント',
-  },
-};
-
 export const logo = (
   <Image
     alt="New API"
@@ -48,8 +36,6 @@ export const logo = (
 );
 
 export function baseOptions(locale: string): BaseLayoutProps {
-  const translations = localeMap[locale] || localeMap.en;
-
   return {
     i18n,
     nav: {
@@ -62,12 +48,5 @@ export function baseOptions(locale: string): BaseLayoutProps {
         </>
       ),
     },
-    links: [
-      {
-        type: 'main',
-        text: translations.docs,
-        url: getLocalePath(locale, 'docs'),
-      },
-    ],
   };
 }
