@@ -474,7 +474,7 @@ Updates the default configuration of a session.
 | :--------------------------------- | :--------------- | :------- | :---------------------------------------------- | :------------------------------------ |
 | event_id                           | String           | No       | Client-generated event identifier               | event_123                             |
 | type                               | String           | No       | Event type                                      | session.update                        |
-| modalities                         | Array of Strings | No       | Modalities the model can respond with           | ["text", "audio"]                     |
+| modalities                         | Array of Strings | No       | Modalities the model can respond with           | `["text", "audio"]`                   |
 | instructions                       | String           | No       | System instructions prepended to the model call | "Your knowledge cutoff is 2023-10..." |
 | voice                              | String           | No       | Voice type used by the model                    | alloy, echo, shimmer                  |
 | input_audio_format                 | String           | No       | Input audio format                              | pcm16, g711_ulaw, g711_alaw           |
@@ -484,7 +484,7 @@ Updates the default configuration of a session.
 | turn_detection.threshold           | Number           | No       | VAD activation threshold (0.0-1.0)              | 0.8                                   |
 | turn_detection.prefix_padding_ms   | Integer          | No       | Audio duration to include before speech starts  | 500                                   |
 | turn_detection.silence_duration_ms | Integer          | No       | Silence duration to detect speech stop          | 1000                                  |
-| tools                              | Array            | No       | List of tools available to the model            | []                                    |
+| tools                              | Array            | No       | List of tools available to the model            | `[]`                                  |
 | tool_choice                        | String           | No       | Method for the model to choose tools            | auto/none/required                    |
 | temperature                        | Number           | No       | Model sampling temperature                      | 0.8                                   |
 | max_output_tokens                  | String/Integer   | No       | Maximum number of tokens for a single response  | "inf"/4096                            |
@@ -530,11 +530,11 @@ Adds a new conversation item to the conversation.
 | item.type        | String | No       | Conversation item type                                   | message/function_call/function_call_output |
 | item.status      | String | No       | Conversation item status                                 | completed/in_progress/incomplete           |
 | item.role        | String | No       | Role of the message sender                               | user/assistant/system                      |
-| item.content     | Array  | No       | Message content                                          | [text/audio/transcript]                    |
+| item.content     | Array  | No       | Message content                                          | `[text/audio/transcript]`                  |
 | item.call_id     | String | No       | ID of the function call                                  | call_001                                   |
 | item.name        | String | No       | Name of the function being called                        | function_name                              |
-| item.arguments   | String | No       | Arguments for the function call                          | {"param": "value"}                         |
-| item.output      | String | No       | Output result of the function call                       | {"result": "value"}                        |
+| item.arguments   | String | No       | Arguments for the function call                          | `{"param": "value"}`                       |
+| item.output      | String | No       | Output result of the function call                       | `{"result": "value"}`                      |
 
 #### conversation.item.truncate
 
@@ -562,18 +562,18 @@ Deletes the specified conversation item from the conversation history.
 
 Triggers response generation.
 
-| Parameter                    | Type             | Required | Description                          | Example Value                   |
-| :--------------------------- | :--------------- | :------- | :----------------------------------- | :------------------------------ |
-| event_id                     | String           | No       | Client-generated event identifier    | event_234                       |
-| type                         | String           | No       | Event type                           | response.create                 |
-| response.modalities          | Array of Strings | No       | Modalities for the response          | ["text", "audio"]               |
-| response.instructions        | String           | No       | Instructions for the model           | "Please assist the user."       |
-| response.voice               | String           | No       | Voice type used by the model         | alloy/echo/shimmer              |
-| response.output_audio_format | String           | No       | Output audio format                  | pcm16                           |
-| response.tools               | Array            | No       | List of tools available to the model | ["type", "name", "description"] |
-| response.tool_choice         | String           | No       | Method for the model to choose tools | auto                            |
-| response.temperature         | Number           | No       | Sampling temperature                 | 0.7                             |
-| response.max_output_tokens   | Integer/String   | No       | Maximum number of output tokens      | 150/"inf"                       |
+| Parameter                    | Type             | Required | Description                          | Example Value                     |
+| :--------------------------- | :--------------- | :------- | :----------------------------------- | :-------------------------------- |
+| event_id                     | String           | No       | Client-generated event identifier    | event_234                         |
+| type                         | String           | No       | Event type                           | response.create                   |
+| response.modalities          | Array of Strings | No       | Modalities for the response          | `["text", "audio"]`               |
+| response.instructions        | String           | No       | Instructions for the model           | "Please assist the user."         |
+| response.voice               | String           | No       | Voice type used by the model         | alloy/echo/shimmer                |
+| response.output_audio_format | String           | No       | Output audio format                  | pcm16                             |
+| response.tools               | Array            | No       | List of tools available to the model | `["type", "name", "description"]` |
+| response.tool_choice         | String           | No       | Method for the model to choose tools | auto                              |
+| response.temperature         | Number           | No       | Sampling temperature                 | 0.7                               |
+| response.max_output_tokens   | Integer/String   | No       | Maximum number of output tokens      | 150/"inf"                         |
 
 #### response.cancel
 
@@ -592,7 +592,7 @@ Event returned when an error occurs.
 
 | Parameter      | Type             | Required | Description                            | Example Value                      |
 | :------------- | :--------------- | :------- | :------------------------------------- | :--------------------------------- |
-| event_id       | Array of Strings | No       | Unique identifier for the server event | ["event_890"]                      |
+| event_id       | Array of Strings | No       | Unique identifier for the server event | `["event_890"]`                    |
 | type           | String           | No       | Event type                             | error                              |
 | error.type     | String           | No       | Error type                             | invalid_request_error/server_error |
 | error.code     | String           | No       | Error code                             | invalid_event                      |
@@ -616,16 +616,16 @@ This event is returned when input audio transcription is enabled and transcripti
 
 This event is returned when input audio transcription is configured, but the transcription request for a user message fails.
 
-| Parameter     | Type             | Required | Description                                | Example Value                                          |
-| :------------ | :--------------- | :------- | :----------------------------------------- | :----------------------------------------------------- |
-| event_id      | Array of Strings | No       | Unique identifier for the server event     | ["conversation.item.input_audio_transcription.failed"] |
-| type          | Array of Strings | No       | Event type                                 | ["conversation.item.input_audio_transcription.failed"] |
-| item_id       | String           | No       | ID of the user message item                | msg_003                                                |
-| content_index | Integer          | No       | Index of the content part containing audio | 0                                                      |
-| error.type    | String           | No       | Error type                                 | transcription_error                                    |
-| error.code    | String           | No       | Error code                                 | audio_unintelligible                                   |
-| error.message | String           | No       | Human-readable error message               | "The audio could not be transcribed."                  |
-| error.param   | String           | No       | Parameter related to the error             | null                                                   |
+| Parameter     | Type             | Required | Description                                | Example Value                                            |
+| :------------ | :--------------- | :------- | :----------------------------------------- | :------------------------------------------------------- |
+| event_id      | Array of Strings | No       | Unique identifier for the server event     | `["conversation.item.input_audio_transcription.failed"]` |
+| type          | Array of Strings | No       | Event type                                 | `["conversation.item.input_audio_transcription.failed"]` |
+| item_id       | String           | No       | ID of the user message item                | msg_003                                                  |
+| content_index | Integer          | No       | Index of the content part containing audio | 0                                                        |
+| error.type    | String           | No       | Error type                                 | transcription_error                                      |
+| error.code    | String           | No       | Error code                                 | audio_unintelligible                                     |
+| error.message | String           | No       | Human-readable error message               | "The audio could not be transcribed."                    |
+| error.param   | String           | No       | Parameter related to the error             | null                                                     |
 
 #### conversation.item.truncated
 
@@ -703,7 +703,7 @@ This event is returned when a new response is created.
 | response.object         | String           | No       | Object type                                    | realtime.response |
 | response.status         | String           | No       | Status of the response                         | in_progress       |
 | response.status_details | Object           | No       | Additional details about the status            | null              |
-| response.output         | Array of Strings | No       | List of output items generated by the response | ["[]"]            |
+| response.output         | Array of Strings | No       | List of output items generated by the response | `["[]"]`          |
 | response.usage          | Object           | No       | Usage statistics for the response              | null              |
 
 #### response.done
@@ -718,7 +718,7 @@ This event is returned when the response completes streaming.
 | response.object              | String           | No       | Object type                                    | realtime.response                     |
 | response.status              | String           | No       | Final status of the response                   | completed/cancelled/failed/incomplete |
 | response.status_details      | Object           | No       | Additional details about the status            | null                                  |
-| response.output              | Array of Strings | No       | List of output items generated by the response | ["[...]"]                             |
+| response.output              | Array of Strings | No       | List of output items generated by the response | `["[...]"]`                           |
 | response.usage.total_tokens  | Integer          | No       | Total token count                              | 50                                    |
 | response.usage.input_tokens  | Integer          | No       | Input token count                              | 20                                    |
 | response.usage.output_tokens | Integer          | No       | Output token count                             | 30                                    |
@@ -738,7 +738,7 @@ This event is returned when a new output item is created during response generat
 | item.type    | String | No       | Output item type                                    | message/function_call/function_call_output |
 | item.status  | String | No       | Output item status                                  | in_progress/completed                      |
 | item.role    | String | No       | Role associated with the output item                | assistant                                  |
-| item.content | Array  | No       | Content of the output item                          | ["type", "text", "audio", "transcript"]    |
+| item.content | Array  | No       | Content of the output item                          | `["type", "text", "audio", "transcript"]`  |
 
 #### response.output_item.done
 
@@ -755,7 +755,7 @@ This event is returned when an output item completes streaming.
 | item.type    | String | No       | Output item type                                    | message/function_call/function_call_output |
 | item.status  | String | No       | Final status of the output item                     | completed/incomplete                       |
 | item.role    | String | No       | Role associated with the output item                | assistant                                  |
-| item.content | Array  | No       | Content of the output item                          | ["type", "text", "audio", "transcript"]    |
+| item.content | Array  | No       | Content of the output item                          | `["type", "text", "audio", "transcript"]`  |
 
 #### response.content_part.added
 
@@ -888,7 +888,7 @@ This event is returned when the model-generated function call arguments are upda
 | item_id      | String  | No       | ID of the message item                           | fc_001                                 |
 | output_index | Integer | No       | Index of the output item in the response         | 0                                      |
 | call_id      | String  | No       | ID of the function call                          | call_001                               |
-| delta        | String  | No       | JSON-formatted delta for function call arguments | {"location": "San"}                    |
+| delta        | String  | No       | JSON-formatted delta for function call arguments | `{"location": "San"}`                  |
 
 #### response.function_call_arguments.done
 
@@ -902,7 +902,7 @@ This event is returned when the model-generated function call arguments complete
 | item_id      | String  | No       | ID of the message item                               | fc_001                                |
 | output_index | Integer | No       | Index of the output item in the response             | 0                                     |
 | call_id      | String  | No       | ID of the function call                              | call_001                              |
-| arguments    | String  | No       | Final complete function call arguments (JSON format) | {"location": "San Francisco"}         |
+| arguments    | String  | No       | Final complete function call arguments (JSON format) | `{"location": "San Francisco"}`       |
 
 ### Other Status Updates
 
@@ -1005,7 +1005,7 @@ This event is returned when a session is updated.
 | :---------------- | :--------------- | :-------------------- | :------------------- | :------------ |
 | temperature       | Float            | Sampling temperature  | 0.0-2.0              | 1.0           |
 | max_output_tokens | Integer/String   | Maximum output length | 1-4096/"inf"         | "inf"         |
-| modalities        | Array of Strings | Response modalities   | ["text", "audio"]    | ["text"]      |
+| modalities        | Array of Strings | Response modalities   | `["text", "audio"]`  | `["text"]`    |
 | voice             | String           | Voice type            | alloy, echo, shimmer | alloy         |
 
 ### Common Event Parameters Table

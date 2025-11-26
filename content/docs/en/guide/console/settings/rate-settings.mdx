@@ -18,9 +18,9 @@ In the New API system, ratios are key parameters for calculating quota consumpti
 
 ### Quota Unit Conversion:
 
--   1 USD = 500,000 quota points
--   Quota points are the basic unit for internal system billing
--   User balances and consumption records are based on quota points
+- 1 USD = 500,000 quota points
+- Quota points are the basic unit for internal system billing
+- User balances and consumption records are based on quota points
 
 ### Quota Calculation Formulas
 
@@ -62,18 +62,18 @@ Model ratios define the base billing multipliers for different AI models, and th
 
 ### Common Model Ratio Examples
 
-| Model Name      | Model Ratio | Completion Ratio | Official Price (Input) | Official Price (Output) |
-| --------------- | ----------- | ---------------- | ---------------------- | ----------------------- |
-| gpt-4o          | 1.25        | 4                | $2.5/1M Tokens         | $10/1M Tokens           |
-| gpt-3.5-turbo   | 0.25        | 1.33             | $0.5/1M Tokens         | $1.5/1M Tokens          |
-| gpt-4o-mini     | 0.075       | 4                | $0.15/1M Tokens        | $0.6/1M Tokens          |
-| o1              | 7.5         | 4                | $15/1M Tokens          | $60/1M Tokens           |
+| Model Name    | Model Ratio | Completion Ratio | Official Price (Input) | Official Price (Output) |
+| ------------- | ----------- | ---------------- | ---------------------- | ----------------------- |
+| gpt-4o        | 1.25        | 4                | $2.5/1M Tokens         | $10/1M Tokens           |
+| gpt-3.5-turbo | 0.25        | 1.33             | $0.5/1M Tokens         | $1.5/1M Tokens          |
+| gpt-4o-mini   | 0.075       | 4                | $0.15/1M Tokens        | $0.6/1M Tokens          |
+| o1            | 7.5         | 4                | $15/1M Tokens          | $60/1M Tokens           |
 
 Ratio Meaning Explanation:
 
--   Model Ratio: A multiplier relative to the base billing unit, reflecting cost differences between models
--   Completion Ratio: The billing multiplier for output tokens relative to input tokens, reflecting output cost differences
--   Higher ratios consume more quota; lower ratios consume less quota
+- Model Ratio: A multiplier relative to the base billing unit, reflecting cost differences between models
+- Completion Ratio: The billing multiplier for output tokens relative to input tokens, reflecting output cost differences
+- Higher ratios consume more quota; lower ratios consume less quota
 
 ### Setup Methods
 
@@ -88,19 +88,19 @@ Completion ratios are used for additional billing of output tokens, primarily to
 
 ### Default Completion Ratios
 
-| Model Type      | Official Price (Input) | Official Price (Output) | Completion Ratio | Description     |
-| --------------- | ---------------------- | ----------------------- | ---------------- | --------------- |
-| gpt-4o          | 2.5$/1M Tokens         | 10$/1M Tokens           | 4                | Output is 4x input |
-| gpt-3.5-turbo   | 0.5$/1M Tokens         | 1$/1M Tokens            | 2                | Output is 2x input |
-| gpt-image-1     | 5$/1M Tokens           | 40$/1M Tokens           | 8                | Output is 8x input |
-| gpt-4o-mini     | 0.15$/1M Tokens        | 0.6$/1M Tokens          | 4                | Output is 4x input |
-| Other Models    | 1                      | 1                       | 1                | Output is 1x input |
+| Model Type    | Official Price (Input) | Official Price (Output) | Completion Ratio | Description        |
+| ------------- | ---------------------- | ----------------------- | ---------------- | ------------------ |
+| gpt-4o        | 2.5$/1M Tokens         | 10$/1M Tokens           | 4                | Output is 4x input |
+| gpt-3.5-turbo | 0.5$/1M Tokens         | 1$/1M Tokens            | 2                | Output is 2x input |
+| gpt-image-1   | 5$/1M Tokens           | 40$/1M Tokens           | 8                | Output is 8x input |
+| gpt-4o-mini   | 0.15$/1M Tokens        | 0.6$/1M Tokens          | 4                | Output is 4x input |
+| Other Models  | 1                      | 1                       | 1                | Output is 1x input |
 
 ### Setup Instructions
 
--   Completion ratios primarily affect the billing of output tokens
--   Setting to 1 means output token billing is the same as input token billing
--   Greater than 1 means higher billing for output tokens, less than 1 means lower billing for output tokens
+- Completion ratios primarily affect the billing of output tokens
+- Setting to 1 means output token billing is the same as input token billing
+- Greater than 1 means higher billing for output tokens, less than 1 means lower billing for output tokens
 
 ## Group Ratio Settings
 
@@ -129,10 +129,10 @@ Group ratios allow setting differentiated billing multipliers for different user
 
 The visual editor provides an intuitive ratio management interface, supporting:
 
--   Batch editing of model ratios
--   Real-time preview of ratio configurations
--   Conflict detection and prompts
--   One-click synchronization of upstream ratios
+- Batch editing of model ratios
+- Real-time preview of ratio configurations
+- Conflict detection and prompts
+- One-click synchronization of upstream ratios
 
 ![倍率3](/assets/guide/rate-setting-3.png)
 
@@ -150,10 +150,10 @@ For models without ratio settings, the system will:
 
 The system supports automatic synchronization of ratio settings from upstream channels:
 
--   Automatically retrieve upstream model ratios
--   Batch update local ratio configurations
--   Stay synchronized with upstream prices
--   Supports manual adjustment and override
+- Automatically retrieve upstream model ratios
+- Batch update local ratio configurations
+- Stay synchronized with upstream prices
+- Supports manual adjustment and override
 
 ![倍率5](/assets/guide/rate-setting-5.png)
 
@@ -181,11 +181,11 @@ A: You can perform batch operations through the visual editor, or directly add r
 
 #### Scenario Parameters:
 
--   Input tokens: 1,000
--   Output tokens: 500
--   Model Ratio: 15
--   Completion Ratio: 2
--   Group Ratio: 1.0 (Standard user)
+- Input tokens: 1,000
+- Output tokens: 500
+- Model Ratio: 15
+- Completion Ratio: 2
+- Group Ratio: 1.0 (Standard user)
 
 #### Calculation Process:
 
@@ -202,11 +202,11 @@ Equivalent USD Cost: 30,000 ÷ 500,000 = $0.06
 
 #### Scenario Parameters:
 
--   Input tokens: 2,000
--   Output tokens: 1,000
--   Model Ratio: 0.25
--   Completion Ratio: 1.33
--   Group Ratio: 0.5 (VIP user 50% discount)
+- Input tokens: 2,000
+- Output tokens: 1,000
+- Model Ratio: 0.25
+- Completion Ratio: 1.33
+- Group Ratio: 0.5 (VIP user 50% discount)
 
 #### Calculation Process:
 
@@ -223,9 +223,9 @@ Equivalent USD Cost: 416.25 ÷ 500,000 = $0.00083
 
 #### Scenario Parameters:
 
--   Model Fixed Price: $0.02
--   Group Ratio: 1.0 (Standard user)
--   Quota Unit: 500,000
+- Model Fixed Price: $0.02
+- Group Ratio: 1.0 (Standard user)
+- Quota Unit: 500,000
 
 #### Calculation Process:
 

@@ -478,7 +478,7 @@ def on_message(ws, message):
 | ---------------------------------- | ----------- | ------ | ------------------------------------------------ | ------------------------------------- |
 | event_id                           | 文字列      | いいえ | クライアントが生成したイベント識別子             | event_123                             |
 | type                               | 文字列      | いいえ | イベントタイプ                                   | session.update                        |
-| modalities                         | 文字列配列  | いいえ | モデルが応答できるモダリティタイプ               | ["text", "audio"]                     |
+| modalities                         | 文字列配列  | いいえ | モデルが応答できるモダリティタイプ               | `["text", "audio"]`                   |
 | instructions                       | 文字列      | いいえ | モデル呼び出しの前にプリセットされるシステム指示 | "Your knowledge cutoff is 2023-10..." |
 | voice                              | 文字列      | いいえ | モデルが使用する音声タイプ                       | alloy、echo、shimmer                  |
 | input_audio_format                 | 文字列      | いいえ | 入力オーディオ形式                               | pcm16、g711_ulaw、g711_alaw           |
@@ -488,7 +488,7 @@ def on_message(ws, message):
 | turn_detection.threshold           | 数値        | いいえ | VAD アクティベーション閾値 (0.0-1.0)             | 0.8                                   |
 | turn_detection.prefix_padding_ms   | 整数        | いいえ | 音声開始前に含めるオーディオの長さ               | 500                                   |
 | turn_detection.silence_duration_ms | 整数        | いいえ | 音声停止を検出する無音の継続時間                 | 1000                                  |
-| tools                              | 配列        | いいえ | モデルが利用できるツールリスト                   | []                                    |
+| tools                              | 配列        | いいえ | モデルが利用できるツールリスト                   | `[]`                                  |
 | tool_choice                        | 文字列      | いいえ | モデルがツールを選択する方法                     | auto/none/required                    |
 | temperature                        | 数値        | いいえ | モデルのサンプリング温度                         | 0.8                                   |
 | max_output_tokens                  | 文字列/整数 | いいえ | 1回の応答での最大トークン数                      | "inf"/4096                            |
@@ -534,11 +534,11 @@ def on_message(ws, message):
 | item.type        | 文字列 | いいえ | 会話アイテムのタイプ                           | message/function_call/function_call_output |
 | item.status      | 文字列 | いいえ | 会話アイテムのステータス                       | completed/in_progress/incomplete           |
 | item.role        | 文字列 | いいえ | メッセージ送信者のロール                       | user/assistant/system                      |
-| item.content     | 配列   | いいえ | メッセージ内容                                 | [text/audio/transcript]                    |
+| item.content     | 配列   | いいえ | メッセージ内容                                 | `[text/audio/transcript]`                  |
 | item.call_id     | 文字列 | いいえ | 関数呼び出しの ID                              | call_001                                   |
 | item.name        | 文字列 | いいえ | 呼び出された関数名                             | function_name                              |
-| item.arguments   | 文字列 | いいえ | 関数呼び出しの引数                             | \{\"param\": \"value\"\}                   |
-| item.output      | 文字列 | いいえ | 関数呼び出しの出力結果                         | \{\"result\": \"value\"\}                  |
+| item.arguments   | 文字列 | いいえ | 関数呼び出しの引数                             | `{"param": "value"}`                       |
+| item.output      | 文字列 | いいえ | 関数呼び出しの出力結果                         | `{"result": "value"}`                      |
 
 #### conversation.item.truncate
 
@@ -566,18 +566,18 @@ def on_message(ws, message):
 
 応答生成をトリガーします。
 
-| パラメータ                   | 型          | 必須   | 説明                                 | 例                              |
-| ---------------------------- | ----------- | ------ | ------------------------------------ | ------------------------------- |
-| event_id                     | 文字列      | いいえ | クライアントが生成したイベント識別子 | event_234                       |
-| type                         | 文字列      | いいえ | イベントタイプ                       | response.create                 |
-| response.modalities          | 文字列配列  | いいえ | 応答のモダリティタイプ               | ["text", "audio"]               |
-| response.instructions        | 文字列      | いいえ | モデルへの指示                       | "Please assist the user."       |
-| response.voice               | 文字列      | いいえ | モデルが使用する音声タイプ           | alloy/echo/shimmer              |
-| response.output_audio_format | 文字列      | いいえ | 出力オーディオ形式                   | pcm16                           |
-| response.tools               | 配列        | いいえ | モデルが利用できるツールリスト       | ["type", "name", "description"] |
-| response.tool_choice         | 文字列      | いいえ | モデルがツールを選択する方法         | auto                            |
-| response.temperature         | 数値        | いいえ | サンプリング温度                     | 0.7                             |
-| response.max_output_tokens   | 整数/文字列 | いいえ | 最大出力トークン数                   | 150/"inf"                       |
+| パラメータ                   | 型          | 必須   | 説明                                 | 例                                |
+| ---------------------------- | ----------- | ------ | ------------------------------------ | --------------------------------- |
+| event_id                     | 文字列      | いいえ | クライアントが生成したイベント識別子 | event_234                         |
+| type                         | 文字列      | いいえ | イベントタイプ                       | response.create                   |
+| response.modalities          | 文字列配列  | いいえ | 応答のモダリティタイプ               | `["text", "audio"]`               |
+| response.instructions        | 文字列      | いいえ | モデルへの指示                       | "Please assist the user."         |
+| response.voice               | 文字列      | いいえ | モデルが使用する音声タイプ           | alloy/echo/shimmer                |
+| response.output_audio_format | 文字列      | いいえ | 出力オーディオ形式                   | pcm16                             |
+| response.tools               | 配列        | いいえ | モデルが利用できるツールリスト       | `["type", "name", "description"]` |
+| response.tool_choice         | 文字列      | いいえ | モデルがツールを選択する方法         | auto                              |
+| response.temperature         | 数値        | いいえ | サンプリング温度                     | 0.7                               |
+| response.max_output_tokens   | 整数/文字列 | いいえ | 最大出力トークン数                   | 150/"inf"                         |
 
 #### response.cancel
 
@@ -596,7 +596,7 @@ def on_message(ws, message):
 
 | パラメータ     | 型         | 必須   | 説明                                 | 例                                 |
 | -------------- | ---------- | ------ | ------------------------------------ | ---------------------------------- |
-| event_id       | 文字列配列 | いいえ | サーバーサイドイベントの一意の識別子 | ["event_890"]                      |
+| event_id       | 文字列配列 | いいえ | サーバーサイドイベントの一意の識別子 | `["event_890"]`                    |
 | type           | 文字列     | いいえ | イベントタイプ                       | error                              |
 | error.type     | 文字列     | いいえ | エラータイプ                         | invalid_request_error/server_error |
 | error.code     | 文字列     | いいえ | エラーコード                         | invalid_event                      |
@@ -620,16 +620,16 @@ def on_message(ws, message):
 
 入力オーディオ文字起こし機能が設定されているものの、ユーザーメッセージの文字起こしリクエストが失敗したときにこのイベントが返されます。
 
-| パラメータ    | 型         | 必須   | 説明                                         | 例                                                     |
-| ------------- | ---------- | ------ | -------------------------------------------- | ------------------------------------------------------ |
-| event_id      | 文字列配列 | いいえ | サーバーサイドイベントの一意の識別子         | event_2324                                             |
-| type          | 文字列配列 | いいえ | イベントタイプ                               | ["conversation.item.input_audio_transcription.failed"] |
-| item_id       | 文字列     | いいえ | ユーザーメッセージアイテムの ID              | msg_003                                                |
-| content_index | 整数       | いいえ | オーディオを含むコンテンツ部分のインデックス | 0                                                      |
-| error.type    | 文字列     | いいえ | エラータイプ                                 | transcription_error                                    |
-| error.code    | 文字列     | いいえ | エラーコード                                 | audio_unintelligible                                   |
-| error.message | 文字列     | いいえ | 人間が読めるエラーメッセージ                 | "The audio could not be transcribed."                  |
-| error.param   | 文字列     | いいえ | エラーに関連するパラメータ                   | null                                                   |
+| パラメータ    | 型         | 必須   | 説明                                         | 例                                                       |
+| ------------- | ---------- | ------ | -------------------------------------------- | -------------------------------------------------------- |
+| event_id      | 文字列配列 | いいえ | サーバーサイドイベントの一意の識別子         | event_2324                                               |
+| type          | 文字列配列 | いいえ | イベントタイプ                               | `["conversation.item.input_audio_transcription.failed"]` |
+| item_id       | 文字列     | いいえ | ユーザーメッセージアイテムの ID              | msg_003                                                  |
+| content_index | 整数       | いいえ | オーディオを含むコンテンツ部分のインデックス | 0                                                        |
+| error.type    | 文字列     | いいえ | エラータイプ                                 | transcription_error                                      |
+| error.code    | 文字列     | いいえ | エラーコード                                 | audio_unintelligible                                     |
+| error.message | 文字列     | いいえ | 人間が読めるエラーメッセージ                 | "The audio could not be transcribed."                    |
+| error.param   | 文字列     | いいえ | エラーに関連するパラメータ                   | null                                                     |
 
 #### conversation.item.truncated
 
@@ -707,7 +707,7 @@ def on_message(ws, message):
 | response.object         | 文字列       | いいえ | オブジェクトタイプ                         | realtime.response |
 | response.status         | 文字列       | いいえ | 応答のステータス                           | in_progress       |
 | response.status_details | オブジェクト | いいえ | ステータスの追加詳細情報                   | null              |
-| response.output         | 文字列配列   | いいえ | 応答によって生成された出力アイテムのリスト | ["[]"]            |
+| response.output         | 文字列配列   | いいえ | 応答によって生成された出力アイテムのリスト | `["[]"]`          |
 | response.usage          | オブジェクト | いいえ | 応答の使用統計情報                         | null              |
 
 #### response.done
@@ -722,7 +722,7 @@ def on_message(ws, message):
 | response.object              | 文字列       | いいえ | オブジェクトタイプ                         | realtime.response                     |
 | response.status              | 文字列       | いいえ | 応答の最終ステータス                       | completed/cancelled/failed/incomplete |
 | response.status_details      | オブジェクト | いいえ | ステータスの追加詳細情報                   | null                                  |
-| response.output              | 文字列配列   | いいえ | 応答によって生成された出力アイテムのリスト | ["[...]"]                             |
+| response.output              | 文字列配列   | いいえ | 応答によって生成された出力アイテムのリスト | `["[...]"]`                           |
 | response.usage.total_tokens  | 整数         | いいえ | 合計トークン数                             | 50                                    |
 | response.usage.input_tokens  | 整数         | いいえ | 入力トークン数                             | 20                                    |
 | response.usage.output_tokens | 整数         | いいえ | 出力トークン数                             | 30                                    |
@@ -742,7 +742,7 @@ def on_message(ws, message):
 | item.type    | 文字列 | いいえ | 出力アイテムタイプ                   | message/function_call/function_call_output |
 | item.status  | 文字列 | いいえ | 出力アイテムのステータス             | in_progress/completed                      |
 | item.role    | 文字列 | いいえ | 出力アイテムに関連付けられたロール   | assistant                                  |
-| item.content | 配列   | いいえ | 出力アイテムのコンテンツ             | ["type", "text", "audio", "transcript"]    |
+| item.content | 配列   | いいえ | 出力アイテムのコンテンツ             | `["type", "text", "audio", "transcript"]`  |
 
 #### response.output_item.done
 
@@ -759,7 +759,7 @@ def on_message(ws, message):
 | item.type    | 文字列 | いいえ | 出力アイテムタイプ                   | message/function_call/function_call_output |
 | item.status  | 文字列 | いいえ | 出力アイテムの最終ステータス         | completed/incomplete                       |
 | item.role    | 文字列 | いいえ | 出力アイテムに関連付けられたロール   | assistant                                  |
-| item.content | 配列   | いいえ | 出力アイテムのコンテンツ             | ["type", "text", "audio", "transcript"]    |
+| item.content | 配列   | いいえ | 出力アイテムのコンテンツ             | `["type", "text", "audio", "transcript"]`  |
 
 #### response.content_part.added
 
@@ -892,7 +892,7 @@ def on_message(ws, message):
 | item_id      | 文字列 | いいえ | メッセージアイテムの ID              | fc_001                                 |
 | output_index | 整数   | いいえ | 応答内の出力アイテムのインデックス   | 0                                      |
 | call_id      | 文字列 | いいえ | 関数呼び出しの ID                    | call_001                               |
-| delta        | 文字列 | いいえ | JSON 形式の関数呼び出し引数の増分    | \{\"location\": \"San\"\}              |
+| delta        | 文字列 | いいえ | JSON 形式の関数呼び出し引数の増分    | `{"location": "San"}`                  |
 
 #### response.function_call_arguments.done
 
@@ -906,7 +906,7 @@ def on_message(ws, message):
 | item_id      | 文字列 | いいえ | メッセージアイテムの ID                    | fc_001                                |
 | output_index | 整数   | いいえ | 応答内の出力アイテムのインデックス         | 0                                     |
 | call_id      | 文字列 | いいえ | 関数呼び出しの ID                          | call_001                              |
-| arguments    | 文字列 | いいえ | 最終的な完全な関数呼び出し引数 (JSON 形式) | \{\"location\": \"San Francisco\"\}   |
+| arguments    | 文字列 | いいえ | 最終的な完全な関数呼び出し引数 (JSON 形式) | `{"location": "San Francisco"}`       |
 
 ### その他のステータス更新
 
@@ -1009,7 +1009,7 @@ def on_message(ws, message):
 | ----------------- | ------------ | ---------------- | -------------------- | ------------ |
 | temperature       | 浮動小数点数 | サンプリング温度 | 0.0-2.0              | 1.0          |
 | max_output_tokens | 整数/文字列  | 最大出力長       | 1-4096/"inf"         | "inf"        |
-| modalities        | 文字列配列   | 応答モダリティ   | ["text", "audio"]    | ["text"]     |
+| modalities        | 文字列配列   | 応答モダリティ   | `["text", "audio"]`  | `["text"]`   |
 | voice             | 文字列       | 音声タイプ       | alloy, echo, shimmer | alloy        |
 
 ### イベント共通パラメータ表

@@ -8,16 +8,19 @@ title: ローカル開発とデプロイ
 
 ローカル開発を開始する前に、以下のソフトウェアがシステムにインストールされていることを確認してください。
 
--   **Go** 1.21 以降（バックエンド開発）
--   **Node.js** 18 以降（フロントエンド開発）
--   **Bun** 最新バージョン（推奨されるパッケージマネージャー、npm/yarn より25倍高速）
--   **Git**（バージョン管理）
--   **MySQL**（オプション、デフォルトでは SQLite を使用）
--   **Redis**（オプション、パフォーマンス向上用）
--   **Visual Studio Code** またはその他のコードエディター
+- **Go** 1.21 以降（バックエンド開発）
+- **Node.js** 18 以降（フロントエンド開発）
+- **Bun** 最新バージョン（推奨されるパッケージマネージャー、npm/yarn より25倍高速）
+- **Git**（バージョン管理）
+- **MySQL**（オプション、デフォルトでは SQLite を使用）
+- **Redis**（オプション、パフォーマンス向上用）
+- **Visual Studio Code** またはその他のコードエディター
 
 <Callout type="info" title="Bun について">
-  Bun は超高速な JavaScript パッケージマネージャー、テストランナー、およびバンドラーです。従来の npm や yarn と比較して、Bun のインストール速度は25倍速く、2024年に最も推奨される JavaScript パッケージ管理ツールです。
+  Bun は超高速な JavaScript
+  パッケージマネージャー、テストランナー、およびバンドラーです。従来の npm や
+  yarn と比較して、Bun のインストール速度は25倍速く、2024年に最も推奨される
+  JavaScript パッケージ管理ツールです。
 </Callout>
 
 ## プロジェクトのクローン
@@ -54,8 +57,8 @@ SQL_DSN=root:password@tcp(localhost:3306)/new-api   # MySQL を使用する場�
 ```
 
 <Callout type="info" title="ヒント">
-  `SQL_DSN` を設定しない場合、システムはデフォルトで SQLite データベースを使用し、`one-api.db`
-  ファイルに保存されます。
+  `SQL_DSN` を設定しない場合、システムはデフォルトで SQLite
+  データベースを使用し、`one-api.db` ファイルに保存されます。
 </Callout>
 
 ### バックエンドサービスの実行
@@ -144,11 +147,11 @@ bun run build   # bun を使用してフロントエンドリソースをビル�
 ### フロントエンドデバッグ
 
 1.  **Chrome DevTools の使用**:
-    -   Chrome 開発者ツール (F12) を開く
-    -   Console および Network タブを確認する
+    - Chrome 開発者ツール (F12) を開く
+    - Console および Network タブを確認する
 2.  **React 開発者ツール**:
-    -   Chrome に React Developer Tools 拡張機能をインストールする
-    -   これを使用してコンポーネント構造と状態を検査する
+    - Chrome に React Developer Tools 拡張機能をインストールする
+    - これを使用してコンポーネント構造と状態を検査する
 
 ## プロジェクト構造
 

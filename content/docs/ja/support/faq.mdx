@@ -1,11 +1,14 @@
-```
----
+﻿---
 title: よくある質問
 ---
 
 ## 💰 クォータ関連の質問
 
-<Callout type="info" title="クォータとは何ですか？どのように計算されますか？" collapsible>
+<Callout
+  type="info"
+  title="クォータとは何ですか？どのように計算されますか？"
+  collapsible
+>
   クォータ計算式は以下の通りです。
 </Callout>
 
@@ -23,7 +26,11 @@ title: よくある質問
 
     - New API のデフォルト倍率は公式倍率と一致しており、調整済みです。
 
-<Callout type="info" title="アカウントのクォータは十分なのに、クォータ不足と表示されるのはなぜですか？" collapsible>
+<Callout
+  type="info"
+  title="アカウントのクォータは十分なのに、クォータ不足と表示されるのはなぜですか？"
+  collapsible
+>
   これは、トークンクォータとアカウントクォータが別々であるためです。
 </Callout>
 
@@ -33,7 +40,11 @@ title: よくある質問
 
 ## 🔧 チャネル設定の問題
 
-<Callout type="info" title="チャネルにおける「重み」と「優先度」とは何ですか？" collapsible>
+<Callout
+  type="info"
+  title="チャネルにおける「重み」と「優先度」とは何ですか？"
+  collapsible
+>
   重みと優先度は、チャネルの使用順序と割り当てを制御する2つの重要なパラメータです。
 </Callout>
 
@@ -47,7 +58,11 @@ title: よくある質問
 
     - 同じ優先度1の2つのチャネルで、重み比が2:1の場合、リクエストは2:1の比率で割り当てられます。
 
-<Callout type="info" title="利用可能なチャネルがありませんと表示されますか？" collapsible>
+<Callout
+  type="info"
+  title="利用可能なチャネルがありませんと表示されますか？"
+  collapsible
+>
   以下の設定を確認してください。
 </Callout>
 
@@ -70,14 +85,19 @@ title: よくある質問
   title="チャネルテストエラー：倍率または価格が設定されていません。管理者に連絡して設定してください。"
   collapsible
 >
-  「システム設定 - 運用設定 - モデル倍率設定」で倍率または価格が設定されているか確認してください。
+  「システム設定 - 運用設定 -
+  モデル倍率設定」で倍率または価格が設定されているか確認してください。
 </Callout>
 
     または、「システム設定 - 運用設定」で「自己利用モード」を有効にしてください。
 
 ## 🌐 デプロイと接続の問題
 
-<Callout type="info" title="ChatGPT Next Web エラー：Failed to fetch" collapsible>
+<Callout
+  type="info"
+  title="ChatGPT Next Web エラー：Failed to fetch"
+  collapsible
+>
   以下の点を確認してください。
 </Callout>
 
@@ -85,20 +105,32 @@ title: よくある質問
     2. APIアドレスとAPIキーが正しく入力されていることを確認してください。
     3. HTTPSが有効になっているか確認してください（ブラウザはHTTPSドメイン下のHTTPリクエストをブロックします）。
 
-<Callout type="info" title="エラー：現在のグループ負荷は飽和状態です。しばらくしてからもう一度お試しください。" collapsible>
+<Callout
+  type="info"
+  title="エラー：現在のグループ負荷は飽和状態です。しばらくしてからもう一度お試しください。"
+  collapsible
+>
   これは、アップストリームチャネルで429エラー（リクエストが多すぎます）が発生したことを意味します。
 </Callout>
 
 ## 📦 データベースとアップグレードの問題
 
-<Callout type="info" title="アップグレード後、データは失われますか？" collapsible>
+<Callout
+  type="info"
+  title="アップグレード後、データは失われますか？"
+  collapsible
+>
   データベースの種類によって異なります。
 </Callout>
 
     - MySQL：データは失われません。
     - SQLite：one-api.db データベースファイルを永続化するために、デプロイコマンドに従ってボリュームをマウントする必要があります。そうしないと、コンテナ再起動後にデータが失われます。
 
-<Callout type="info" title="アップグレード前にデータベースを変更する必要がありますか？" collapsible>
+<Callout
+  type="info"
+  title="アップグレード前にデータベースを変更する必要がありますか？"
+  collapsible
+>
   通常は必要ありません。システムは初期化時に自動的に調整します。
 </Callout>
 
@@ -122,4 +154,3 @@ title: よくある質問
     1. [インストールとデプロイのドキュメント](../installation) を参照する
     2. [GitHubでissueを提出する](feedback-issues.md)
     3. [QQ交流グループに参加して助けを求める](community-interaction.md)
-```

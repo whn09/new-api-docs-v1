@@ -1,0 +1,15 @@
+{
+  "title": "AIアプリケーション",
+  "description": "対応AIアプリケーションと統合",
+  "icon": "Sparkles",
+  "root": true,
+  "pages": [
+    "cherry-studio",
+    "claude-code",
+    "codex-cli",
+    "factory-droid-cli",
+    "fluent-read",
+    "langbot",
+    "luna-translator"
+  ]
+}

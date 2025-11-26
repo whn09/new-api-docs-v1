@@ -1,0 +1,14 @@
+{
+  "title": "リレーAPI",
+  "icon": "ArrowRightLeft",
+  "pages": [
+    "chat",
+    "embeddings",
+    "rerank",
+    "realtime",
+    "image",
+    "audio",
+    "music",
+    "video"
+  ]
+}

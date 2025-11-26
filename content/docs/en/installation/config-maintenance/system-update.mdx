@@ -36,7 +36,9 @@ docker run --name new-api -d --restart always \
 ```
 
 <Callout type="warn" title="Please Note">
-  Please ensure that you use the same parameters as the original container when starting the new container, especially for data volume mounts and environment variable configurations.
+  Please ensure that you use the same parameters as the original container when
+  starting the new container, especially for data volume mounts and environment
+  variable configurations.
 </Callout>
 
 ### Method Two: Update using Docker Compose
@@ -114,7 +116,8 @@ For multi-node deployment environments, the following update strategy is recomme
 This strategy can minimize the risk of service interruption.
 
 <Callout title="Detailed Guide">
-  For a complete guide on cluster deployment, please refer to the [Cluster Deployment Documentation](cluster-deployment.md).
+  For a complete guide on cluster deployment, please refer to the [Cluster
+  Deployment Documentation](cluster-deployment.md).
 </Callout>
 
 ## Post-update Checklist
@@ -175,21 +178,21 @@ cd ..
 
 ### Service Fails to Start After Update
 
--   Check logs for error messages
--   Confirm database connection is normal
--   Confirm environment variable configuration is correct
+- Check logs for error messages
+- Confirm database connection is normal
+- Confirm environment variable configuration is correct
 
 ### Abnormal Functionality After Update
 
--   Check for any API format changes
--   Check if frontend and backend versions match
--   Confirm if the new version requires additional configuration
+- Check for any API format changes
+- Check if frontend and backend versions match
+- Confirm if the new version requires additional configuration
 
 ### Database Structure Incompatibility
 
--   Check update logs for database migration instructions
--   Check if manual execution of database migration scripts is required
--   Contact developers for database upgrade guidance
+- Check update logs for database migration instructions
+- Check if manual execution of database migration scripts is required
+- Contact developers for database upgrade guidance
 
 ## Automatic Update Tools (Use with Caution)
 
@@ -202,5 +205,8 @@ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
 ```
 
 <Callout type="warn" title="Please Note">
-  Automatic updates may lead to unexpected issues, especially when database structures change. It is recommended to use automatic updates only in testing environments; production environments should control the update process manually.
+  Automatic updates may lead to unexpected issues, especially when database
+  structures change. It is recommended to use automatic updates only in testing
+  environments; production environments should control the update process
+  manually.
 </Callout>

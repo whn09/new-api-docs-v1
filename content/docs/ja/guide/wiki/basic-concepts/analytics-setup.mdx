@@ -138,8 +138,8 @@ environment:
 2.  ブラウザの開発者ツール（F12）→ **ネットワーク**タブを開く
 3.  ページを更新
 4.  以下のリクエストを探します：
-    -   Google Analytics：`https://www.googletagmanager.com/gtag/js`
-    -   Umami：設定したスクリプトURL
+    - Google Analytics：`https://www.googletagmanager.com/gtag/js`
+    - Umami：設定したスクリプトURL
 
 ページソースコードを確認し、`<head>`セクションに注入されたスクリプトを探すこともできます。
 
@@ -166,26 +166,26 @@ docker exec new-api env | grep -E "GOOGLE_ANALYTICS|UMAMI"
 
 ### プライバシー考慮事項
 
--   Google Analyticsは[Googleプライバシーポリシー](https://policies.google.com/privacy)に基づいてユーザーデータを収集します
--   Umamiはプライバシーを重視しており、個人データを収集しません
--   分析ツールを使用する場合は、ウェブサイトにプライバシーポリシーを追加することを検討してください
--   両方のツールは、正しく設定されていればGDPR要件に準拠しています
+- Google Analyticsは[Googleプライバシーポリシー](https://policies.google.com/privacy)に基づいてユーザーデータを収集します
+- Umamiはプライバシーを重視しており、個人データを収集しません
+- 分析ツールを使用する場合は、ウェブサイトにプライバシーポリシーを追加することを検討してください
+- 両方のツールは、正しく設定されていればGDPR要件に準拠しています
 
 ---
 
 ## 環境変数リファレンス
 
-| 変数                  | 必須 | デフォルト値                                 | 説明                                             |
-| :-------------------- | :--- | :------------------------------------------- | :----------------------------------------------- |
-| `GOOGLE_ANALYTICS_ID` | いいえ | -                                            | Google Analytics 4 測定ID（形式：G-XXXXXXXXXX） |
-| `UMAMI_WEBSITE_ID`    | いいえ | -                                            | Umami ウェブサイトID（UUID形式）               |
-| `UMAMI_SCRIPT_URL`    | いいえ | `https://analytics.umami.is/script.js`       | Umami スクリプトURL（セルフホストのみ必要）   |
+| 変数                  | 必須   | デフォルト値                           | 説明                                            |
+| :-------------------- | :----- | :------------------------------------- | :---------------------------------------------- |
+| `GOOGLE_ANALYTICS_ID` | いいえ | -                                      | Google Analytics 4 測定ID（形式：G-XXXXXXXXXX） |
+| `UMAMI_WEBSITE_ID`    | いいえ | -                                      | Umami ウェブサイトID（UUID形式）                |
+| `UMAMI_SCRIPT_URL`    | いいえ | `https://analytics.umami.is/script.js` | Umami スクリプトURL（セルフホストのみ必要）     |
 
 ---
 
 ## 関連リンク
 
--   [Google Analytics](https://analytics.google.com/)
--   [Umami Analytics](https://umami.is/)
--   [Umami Documentation](https://umami.is/docs)
--   [Google Analytics プライバシー](https://support.google.com/analytics/answer/6004245)
+- [Google Analytics](https://analytics.google.com/)
+- [Umami Analytics](https://umami.is/)
+- [Umami Documentation](https://umami.is/docs)
+- [Google Analytics プライバシー](https://support.google.com/analytics/answer/6004245)

@@ -8,16 +8,19 @@ This document provides detailed steps for setting up and developing the New API 
 
 Before starting local development, please ensure that the following software is installed on your system:
 
--   **Go** 1.21 or higher (for backend development)
--   **Node.js** 18 or higher (for frontend development)
--   **Bun** latest version (recommended package manager, 25x faster than npm/yarn)
--   **Git** (for version control)
--   **MySQL** (optional, SQLite is used by default)
--   **Redis** (optional, for performance enhancement)
--   **Visual Studio Code** or other code editor
+- **Go** 1.21 or higher (for backend development)
+- **Node.js** 18 or higher (for frontend development)
+- **Bun** latest version (recommended package manager, 25x faster than npm/yarn)
+- **Git** (for version control)
+- **MySQL** (optional, SQLite is used by default)
+- **Redis** (optional, for performance enhancement)
+- **Visual Studio Code** or other code editor
 
 <Callout type="info" title="About Bun">
-  Bun is an incredibly fast JavaScript package manager, test runner, and bundler. Compared to traditional npm or yarn, Bun installs packages 25 times faster and is the most recommended JavaScript package management tool for 2024.
+  Bun is an incredibly fast JavaScript package manager, test runner, and
+  bundler. Compared to traditional npm or yarn, Bun installs packages 25 times
+  faster and is the most recommended JavaScript package management tool for
+  2024.
 </Callout>
 
 ## Clone Project
@@ -54,7 +57,8 @@ SQL_DSN=root:password@tcp(localhost:3306)/new-api   # If using MySQL, uncomment 
 ```
 
 <Callout type="info" title="Hint">
-  If `SQL_DSN` is not configured, the system will default to using an SQLite database, stored in the `one-api.db` file.
+  If `SQL_DSN` is not configured, the system will default to using an SQLite
+  database, stored in the `one-api.db` file.
 </Callout>
 
 ### Run Backend Service
@@ -143,12 +147,12 @@ The built files will be generated into the `web/dist` directory, and the backend
 ### Frontend Debugging
 
 1.  **Use Chrome DevTools**:
-    -   Open Chrome Developer Tools (F12)
-    -   Check the Console and Network tabs
+    - Open Chrome Developer Tools (F12)
+    - Check the Console and Network tabs
 
 2.  **React Developer Tools**:
-    -   Install the React Developer Tools extension in Chrome
-    -   Use it to inspect component structure and state
+    - Install the React Developer Tools extension in Chrome
+    - Use it to inspect component structure and state
 
 ## Project Structure
 

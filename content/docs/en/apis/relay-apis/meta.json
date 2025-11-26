@@ -1,0 +1,14 @@
+{
+  "title": "Relay APIs",
+  "icon": "ArrowRightLeft",
+  "pages": [
+    "chat",
+    "embeddings",
+    "rerank",
+    "realtime",
+    "image",
+    "audio",
+    "music",
+    "video"
+  ]
+}

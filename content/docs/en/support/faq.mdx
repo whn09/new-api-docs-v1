@@ -22,7 +22,11 @@ title: FAQ
 
     - The default ratio of New API is consistent with the official ratio and has been adjusted.
 
-<Callout type="info" title="Why does it prompt insufficient quota when the account quota is sufficient?" collapsible>
+<Callout
+  type="info"
+  title="Why does it prompt insufficient quota when the account quota is sufficient?"
+  collapsible
+>
   This is because token quota and account quota are separate:
 </Callout>
 
@@ -32,8 +36,13 @@ title: FAQ
 
 ## 🔧 Channel Configuration Issues
 
-<Callout type="info" title="What are Weight and Priority in Channels?" collapsible>
-  Weight and Priority are two important parameters that control the order and distribution of channel usage:
+<Callout
+  type="info"
+  title="What are Weight and Priority in Channels?"
+  collapsible
+>
+  Weight and Priority are two important parameters that control the order and
+  distribution of channel usage:
 </Callout>
 
     - Priority: A larger number indicates higher priority; channels with higher priority will be used first.
@@ -59,7 +68,8 @@ title: FAQ
   title="Channel test error: invalid character '<' looking for beginning of value"
   collapsible
 >
-  This error indicates that the return value is not valid JSON, but an HTML page.
+  This error indicates that the return value is not valid JSON, but an HTML
+  page.
 </Callout>
 
     The most likely reason is: Your deployment site's IP or proxy node has been blocked by CloudFlare.
@@ -69,14 +79,19 @@ title: FAQ
   title="Channel test error: Ratio or price not configured, please contact the administrator to set it."
   collapsible
 >
-  Please check if the ratio or price has been configured in 'System Settings - Operation Settings - Model Ratio Settings'.
+  Please check if the ratio or price has been configured in 'System Settings -
+  Operation Settings - Model Ratio Settings'.
 </Callout>
 
     Or enable 'Self-use Mode' in 'System Settings - Operation Settings'.
 
 ## 🌐 Deployment and Connection Issues
 
-<Callout type="info" title="ChatGPT Next Web error: Failed to fetch" collapsible>
+<Callout
+  type="info"
+  title="ChatGPT Next Web error: Failed to fetch"
+  collapsible
+>
   Please check the following:
 </Callout>
 
@@ -84,8 +99,13 @@ title: FAQ
     2. Confirm that the API address and API Key are filled in correctly.
     3. Check if HTTPS is enabled (browsers will block HTTP requests under HTTPS domains).
 
-<Callout type="info" title="Error: Current group load is saturated, please try again later." collapsible>
-  This indicates that an upstream channel encountered a 429 error (Too Many Requests).
+<Callout
+  type="info"
+  title="Error: Current group load is saturated, please try again later."
+  collapsible
+>
+  This indicates that an upstream channel encountered a 429 error (Too Many
+  Requests).
 </Callout>
 
 ## 📦 Database and Upgrade Issues
@@ -97,7 +117,11 @@ title: FAQ
     - MySQL: Data will not be lost.
     - SQLite: You need to mount a volume according to the deployment command to persist the one-api.db database file, otherwise data will be lost after the container restarts.
 
-<Callout type="info" title="Does the database need to be changed before upgrading?" collapsible>
+<Callout
+  type="info"
+  title="Does the database need to be changed before upgrading?"
+  collapsible
+>
   Generally, no. The system will automatically adjust during initialization.
 </Callout>
 
@@ -108,7 +132,8 @@ title: FAQ
   title="Error after manually modifying the database: Database consistency has been corrupted, please contact the administrator?"
   collapsible
 >
-  This error indicates that invalid channel ID records were detected in the 'ability' table. Common reasons:
+  This error indicates that invalid channel ID records were detected in the
+  'ability' table. Common reasons:
 </Callout>
 
     - Invalid channels in the 'ability' table were not cleaned up synchronously when deleting 'channel' table records.

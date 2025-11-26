@@ -122,30 +122,30 @@ services:
 
 ### New API Service Configuration
 
-| Parameter        | Description                                                                 |
-| ---------------- | --------------------------------------------------------------------------- |
-| `image`          | Image name, usually `calciumion/new-api:latest` to get the latest version   |
-| `container_name` | Container name, customizable                                                |
+| Parameter        | Description                                                                    |
+| ---------------- | ------------------------------------------------------------------------------ |
+| `image`          | Image name, usually `calciumion/new-api:latest` to get the latest version      |
+| `container_name` | Container name, customizable                                                   |
 | `restart`        | Container restart policy, recommended to set to `always` for automatic restart |
-| `command`        | Startup command, customizable startup parameters                            |
-| `ports`          | Port mapping, by default maps container's 3000 port to host's 3000 port     |
-| `volumes`        | Volume mapping, ensures data persistence                                   |
-| `environment`    | Environment variable settings, used to configure New API behavior           |
-| `depends_on`     | Dependent services, ensures startup in the correct order                    |
-| `healthcheck`    | Health check configuration, used to monitor service status                  |
+| `command`        | Startup command, customizable startup parameters                               |
+| `ports`          | Port mapping, by default maps container's 3000 port to host's 3000 port        |
+| `volumes`        | Volume mapping, ensures data persistence                                       |
+| `environment`    | Environment variable settings, used to configure New API behavior              |
+| `depends_on`     | Dependent services, ensures startup in the correct order                       |
+| `healthcheck`    | Health check configuration, used to monitor service status                     |
 
 ### Environment Variable Description
 
 New API supports various environment variable configurations. Here are some commonly used ones:
 
-| Environment Variable | Description                                 | Example                               |
-| ------------------- | ------------------------------------------- | ------------------------------------- |
-| `SQL_DSN`           | Database connection string                  | `root:123456@tcp(mysql:3306)/new-api` |
-| `REDIS_CONN_STRING` | Redis connection string                     | `redis://redis`                       |
-| `TZ`                | Time zone setting                           | `Asia/Shanghai`                       |
-| `SESSION_SECRET`    | Session secret (required for multi-node deployment) | `your_random_string`                  |
-| `NODE_TYPE`         | Node type (master/slave)                    | `master` or `slave`                   |
-| `SYNC_FREQUENCY`    | Sync frequency (seconds)                    | `60`                                  |
+| Environment Variable | Description                                         | Example                               |
+| -------------------- | --------------------------------------------------- | ------------------------------------- |
+| `SQL_DSN`            | Database connection string                          | `root:123456@tcp(mysql:3306)/new-api` |
+| `REDIS_CONN_STRING`  | Redis connection string                             | `redis://redis`                       |
+| `TZ`                 | Time zone setting                                   | `Asia/Shanghai`                       |
+| `SESSION_SECRET`     | Session secret (required for multi-node deployment) | `your_random_string`                  |
+| `NODE_TYPE`          | Node type (master/slave)                            | `master` or `slave`                   |
+| `SYNC_FREQUENCY`     | Sync frequency (seconds)                            | `60`                                  |
 
 For a more complete list of environment variables, please refer to the [Environment Variables Configuration Guide](environment-variables.md).
 

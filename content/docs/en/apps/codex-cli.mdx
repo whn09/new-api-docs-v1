@@ -40,18 +40,18 @@ title: OpenAI Codex CLI
 
 ### Features
 
-| **Feature Category** | **Feature** |
-| :------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
-| Terminal-based Coding Assistant | Codex CLI is a terminal-based interactive coding assistant for editing code, generating patches, and running commands in the command line. |
-| Tool-driven Architecture | Provides tools such as `apply_patch`, `shell`, `update_plan`, and `multi_tool_use` for controlled modifications to repository files and operations. |
-| Atomic Patch Editing | Uses a dedicated patch format to atomically add/update/delete files via `apply_patch`, facilitating auditing and rollback. |
-| Sandboxing and Approval | Supports sandboxing policies (e.g., `workspace-write`, `read-only`) and approval modes (`on-request`, `on-failure`, `never`) to control write and network access permissions. |
-| Plan Tracking | `update_plan` is used to list steps and track status, requiring only one `in_progress` step at all times to maintain clear progress. |
-| Interaction Protocol | Sends brief introductory explanations before important operations, maintaining a friendly, concise tone and providing progress updates. |
-| Security Constraints | Adheres to strict rules (no arbitrary changes to unrelated files, no adding copyright headers, no executing destructive commands), requiring user approval for sensitive operations. |
-| Testing and Formatting | Recommends running relevant tests and formatting tools after modifications, but is not responsible for fixing issues unrelated to the current task. |
-| Output and Style | Final output follows CLI rendering specifications (e.g., `**` for headings, backticks for paths/commands), maintaining a scannable, concise structure. |
-| Parallel Execution | Supports running multiple tools in parallel via `multi_tool_use.parallel` to improve efficiency. |
+| **Feature Category**            | **Feature**                                                                                                                                                                          |
+| :------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Terminal-based Coding Assistant | Codex CLI is a terminal-based interactive coding assistant for editing code, generating patches, and running commands in the command line.                                           |
+| Tool-driven Architecture        | Provides tools such as `apply_patch`, `shell`, `update_plan`, and `multi_tool_use` for controlled modifications to repository files and operations.                                  |
+| Atomic Patch Editing            | Uses a dedicated patch format to atomically add/update/delete files via `apply_patch`, facilitating auditing and rollback.                                                           |
+| Sandboxing and Approval         | Supports sandboxing policies (e.g., `workspace-write`, `read-only`) and approval modes (`on-request`, `on-failure`, `never`) to control write and network access permissions.        |
+| Plan Tracking                   | `update_plan` is used to list steps and track status, requiring only one `in_progress` step at all times to maintain clear progress.                                                 |
+| Interaction Protocol            | Sends brief introductory explanations before important operations, maintaining a friendly, concise tone and providing progress updates.                                              |
+| Security Constraints            | Adheres to strict rules (no arbitrary changes to unrelated files, no adding copyright headers, no executing destructive commands), requiring user approval for sensitive operations. |
+| Testing and Formatting          | Recommends running relevant tests and formatting tools after modifications, but is not responsible for fixing issues unrelated to the current task.                                  |
+| Output and Style                | Final output follows CLI rendering specifications (e.g., `**` for headings, backticks for paths/commands), maintaining a scannable, concise structure.                               |
+| Parallel Execution              | Supports running multiple tools in parallel via `multi_tool_use.parallel` to improve efficiency.                                                                                     |
 
 ## AI Model Configuration Method
 
@@ -104,7 +104,10 @@ For optimal performance on Windows, install and use Windows Subsystem for Linux 
 
 #### 4. Modify Configuration File
 
-<Callout type="info" title="One-click Modification of Codex CLI Configuration File">
+<Callout
+  type="info"
+  title="One-click Modification of Codex CLI Configuration File"
+>
   ` iex (irm
   'https://raw.githubusercontent.com/QuantumNous/new-api-docs/refs/heads/main/helper/codex-cli-setup.ps1')
   `
@@ -199,7 +202,10 @@ Official Website: https://brew.sh
 
 #### 4. Modify Configuration File
 
-<Callout type="info" title="One-click Modification of Codex CLI Configuration File">
+<Callout
+  type="info"
+  title="One-click Modification of Codex CLI Configuration File"
+>
   ` curl -fsSL
   https://raw.githubusercontent.com/QuantumNous/new-api-docs/refs/heads/main/helper/codex-cli-setup.sh
   | bash `
@@ -241,7 +247,11 @@ Now you can start using Codex CLI!
     - Install with`sudo`: `sudo npm install -g @openai/codex`
     - Or configure`npm` to use the user directory: `npm config set prefix ~/.npm-global`
 
-<Callout type="info" title="macOS Security Settings Prevent Running" collapsible>
+<Callout
+  type="info"
+  title="macOS Security Settings Prevent Running"
+  collapsible
+>
   If the system prevents Codex CLI from running:
 </Callout>
 
@@ -290,7 +300,10 @@ Codex CLI requires a Node.js environment to run.
 
 #### 3. Modify Configuration File
 
-<Callout type="info" title="One-click Modification of Codex CLI Configuration File">
+<Callout
+  type="info"
+  title="One-click Modification of Codex CLI Configuration File"
+>
   ` curl -fsSL
   https://raw.githubusercontent.com/QuantumNous/new-api-docs/refs/heads/main/helper/codex-cli-setup.sh
   | bash `
@@ -304,8 +317,8 @@ Now you can start using Codex CLI!
 
 <Callout type="info" title="Launch Codex CLI">
   Launch Codex CLI directly: ` # Launch Codex CLI codex ` Use in a specific
-  project: ` # Navigate to your project directory cd /path/to/your/project ` `
-  # Launch Codex CLI codex ` Press Enter to launch Codex CLI
+  project: ` # Navigate to your project directory cd /path/to/your/project ` ` #
+  Launch Codex CLI codex ` Press Enter to launch Codex CLI
 </Callout>
 
 ![linux-img-05.webp](/assets/codex/linux-img-05.webp)
