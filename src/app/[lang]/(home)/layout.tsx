@@ -36,21 +36,21 @@ const docNavItems: Record<
       },
       {
         text: 'Installation',
-        url: '/en/docs/installation/docker-compose-installation',
+        url: '/en/docs/installation/deployment-methods/docker-compose-installation',
         description: 'Various deployment methods and installation guides.',
         icon: <Settings />,
       },
       {
-        text: 'API Reference',
-        url: '/en/docs/api/chat',
-        description: 'Complete API documentation and integration guide.',
-        icon: <Wrench />,
+        text: 'Help & Support',
+        url: '/en/docs/support/faq',
+        description: 'FAQ and community support.',
+        icon: <FileText />,
       },
       {
-        text: 'User Guide',
-        url: '/en/docs/guide/home',
-        description: 'Console features and usage instructions.',
-        icon: <FileText />,
+        text: 'API Reference',
+        url: '/en/docs/apis/relay-apis/chat/openai-chat',
+        description: 'Complete API documentation and integration guide.',
+        icon: <Wrench />,
       },
       {
         text: 'AI Applications',
@@ -71,21 +71,21 @@ const docNavItems: Record<
       },
       {
         text: '部署安装',
-        url: '/zh/docs/installation/docker-compose-installation',
+        url: '/zh/docs/installation/deployment-methods/docker-compose-installation',
         description: '多种部署方式和安装指南。',
         icon: <Settings />,
       },
       {
-        text: 'API 文档',
-        url: '/zh/docs/api/chat',
-        description: '完整的 API 文档和集成指南。',
-        icon: <Wrench />,
+        text: '帮助支持',
+        url: '/zh/docs/support/faq',
+        description: '常见问题和社区支持。',
+        icon: <FileText />,
       },
       {
-        text: '使用指南',
-        url: '/zh/docs/guide/home',
-        description: '控制台功能和使用说明。',
-        icon: <FileText />,
+        text: 'API 文档',
+        url: '/zh/docs/apis/relay-apis/chat/openai-chat',
+        description: '完整的 API 文档和集成指南。',
+        icon: <Wrench />,
       },
       {
         text: 'AI 应用',
@@ -106,21 +106,21 @@ const docNavItems: Record<
       },
       {
         text: 'インストール',
-        url: '/ja/docs/installation/docker-compose-installation',
+        url: '/ja/docs/installation/deployment-methods/docker-compose-installation',
         description: '様々なデプロイ方法とインストールガイド。',
         icon: <Settings />,
       },
       {
-        text: 'API リファレンス',
-        url: '/ja/docs/api/chat',
-        description: '完全な API ドキュメントと統合ガイド。',
-        icon: <Wrench />,
+        text: 'ヘルプ＆サポート',
+        url: '/ja/docs/support/faq',
+        description: 'よくある質問とコミュニティサポート。',
+        icon: <FileText />,
       },
       {
-        text: 'ユーザーガイド',
-        url: '/ja/docs/guide/home',
-        description: 'コンソール機能と使用方法。',
-        icon: <FileText />,
+        text: 'API リファレンス',
+        url: '/ja/docs/apis/relay-apis/chat/openai-chat',
+        description: '完全な API ドキュメントと統合ガイド。',
+        icon: <Wrench />,
       },
       {
         text: 'AI アプリケーション',
@@ -163,6 +163,21 @@ export default async function Layout({
                 text: docNav.items[1].text,
                 url: docNav.items[1].url,
                 icon: docNav.items[1].icon,
+              },
+              {
+                text: docNav.items[2].text,
+                url: docNav.items[2].url,
+                icon: docNav.items[2].icon,
+              },
+              {
+                text: docNav.items[3].text,
+                url: docNav.items[3].url,
+                icon: docNav.items[3].icon,
+              },
+              {
+                text: docNav.items[4].text,
+                url: docNav.items[4].url,
+                icon: docNav.items[4].icon,
               },
             ],
           },
@@ -208,7 +223,7 @@ export default async function Layout({
                     href={docNav.items[2].url}
                     className="lg:col-start-2"
                   >
-                    <Wrench className="bg-fd-primary text-fd-primary-foreground mb-2 rounded-md p-1" />
+                    <FileText className="bg-fd-primary text-fd-primary-foreground mb-2 rounded-md p-1" />
                     <p className="font-medium">{docNav.items[2].text}</p>
                     <p className="text-fd-muted-foreground text-sm">
                       {docNav.items[2].description}
@@ -219,7 +234,7 @@ export default async function Layout({
                     href={docNav.items[3].url}
                     className="lg:col-start-3 lg:row-start-1"
                   >
-                    <FileText className="bg-fd-primary text-fd-primary-foreground mb-2 rounded-md p-1" />
+                    <Wrench className="bg-fd-primary text-fd-primary-foreground mb-2 rounded-md p-1" />
                     <p className="font-medium">{docNav.items[3].text}</p>
                     <p className="text-fd-muted-foreground text-sm">
                       {docNav.items[3].description}
