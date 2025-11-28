@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { Github, Container, MessageCircle } from 'lucide-react';
 import { getLocalePath } from '@/lib/i18n';
 
@@ -16,7 +15,7 @@ const footerContent: Record<
     }[];
     social: { name: string; href: string; icon: React.ReactNode }[];
     copyright: string;
-    beian: { text: string; href?: string; img?: string }[];
+    beian: { text: string; href?: string }[];
   }
 > = {
   zh: {
@@ -24,17 +23,27 @@ const footerContent: Record<
       {
         title: '关于我们',
         links: [
-          { label: '关于项目', href: 'docs/wiki/project-introduction' },
+          {
+            label: '关于项目',
+            href: 'docs/guide/wiki/basic-concepts/project-introduction',
+          },
           { label: '联系我们', href: 'docs/support/community-interaction' },
-          { label: '功能特性', href: 'docs/wiki/features-introduction' },
+          {
+            label: '功能特性',
+            href: 'docs/guide/wiki/basic-concepts/features-introduction',
+          },
         ],
       },
       {
         title: '文档',
         links: [
           { label: '安装部署', href: 'docs/installation' },
-          { label: '使用指南', href: 'docs/guide' },
-          { label: 'API 文档', href: 'docs/api' },
+          { label: '使用指南', href: 'docs/guide/home' },
+          {
+            label: 'API 文档',
+            href: 'https://apifox.newapi.ai/',
+            external: true,
+          },
         ],
       },
       {
@@ -110,7 +119,7 @@ const footerContent: Record<
       },
       {
         name: 'QQ',
-        href: 'https://qm.qq.com/q/Y79glR8raU',
+        href: 'docs/support/community-interaction',
         icon: <MessageCircle className="size-4" />,
       },
     ],
@@ -130,21 +139,28 @@ const footerContent: Record<
         links: [
           {
             label: 'About Project',
-            href: 'docs/wiki/project-introduction',
+            href: 'docs/guide/wiki/basic-concepts/project-introduction',
           },
           {
             label: 'Contact Us',
             href: 'docs/support/community-interaction',
           },
-          { label: 'Features', href: 'docs/wiki/features-introduction' },
+          {
+            label: 'Features',
+            href: 'docs/guide/wiki/basic-concepts/features-introduction',
+          },
         ],
       },
       {
         title: 'Docs',
         links: [
           { label: 'Installation', href: 'docs/installation' },
-          { label: 'User Guide', href: 'docs/guide' },
-          { label: 'API Docs', href: 'docs/api' },
+          { label: 'User Guide', href: 'docs/guide/home' },
+          {
+            label: 'API Docs',
+            href: 'https://apifox.newapi.ai/',
+            external: true,
+          },
         ],
       },
       {
@@ -220,7 +236,7 @@ const footerContent: Record<
       },
       {
         name: 'QQ',
-        href: 'https://qm.qq.com/q/Y79glR8raU',
+        href: 'docs/support/community-interaction',
         icon: <MessageCircle className="size-4" />,
       },
     ],
@@ -240,21 +256,28 @@ const footerContent: Record<
         links: [
           {
             label: 'プロジェクトについて',
-            href: 'docs/wiki/project-introduction',
+            href: 'docs/guide/wiki/basic-concepts/project-introduction',
           },
           {
             label: 'お問い合わせ',
             href: 'docs/support/community-interaction',
           },
-          { label: '機能', href: 'docs/wiki/features-introduction' },
+          {
+            label: '機能',
+            href: 'docs/guide/wiki/basic-concepts/features-introduction',
+          },
         ],
       },
       {
         title: 'ドキュメント',
         links: [
           { label: 'インストール', href: 'docs/installation' },
-          { label: 'ユーザーガイド', href: 'docs/guide' },
-          { label: 'APIドキュメント', href: 'docs/api' },
+          { label: 'ユーザーガイド', href: 'docs/guide/home' },
+          {
+            label: 'APIドキュメント',
+            href: 'https://apifox.newapi.ai/',
+            external: true,
+          },
         ],
       },
       {
@@ -330,7 +353,7 @@ const footerContent: Record<
       },
       {
         name: 'QQ',
-        href: 'https://qm.qq.com/q/Y79glR8raU',
+        href: 'docs/support/community-interaction',
         icon: <MessageCircle className="size-4" />,
       },
     ],
@@ -412,18 +435,26 @@ export function Footer({ lang }: FooterProps) {
 
           {/* Right: Social Icons */}
           <div className="flex items-center gap-4">
-            {content.social.map((social) => (
-              <a
-                key={social.name}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-fd-muted-foreground hover:text-fd-foreground transition-colors"
-                aria-label={social.name}
-              >
-                {social.icon}
-              </a>
-            ))}
+            {content.social.map((social) => {
+              const isExternal = social.href.startsWith('http');
+              const Component = isExternal ? 'a' : Link;
+              return (
+                <Component
+                  key={social.name}
+                  href={
+                    isExternal ? social.href : getLocalePath(lang, social.href)
+                  }
+                  {...(isExternal && {
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                  })}
+                  className="text-fd-muted-foreground hover:text-fd-foreground transition-colors"
+                  aria-label={social.name}
+                >
+                  {social.icon}
+                </Component>
+              );
+            })}
           </div>
         </div>
       </div>
