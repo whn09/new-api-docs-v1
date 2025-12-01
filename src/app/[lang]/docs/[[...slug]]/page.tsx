@@ -50,7 +50,7 @@ export default async function Page(props: {
         />
         <ViewOptions
           markdownUrl={`/${lang}/llms.mdx/${page.slugs.join('/')}`}
-          githubUrl={`https://github.com/${owner}/${repo}/blob/${branch}/content/docs/${lang}/${page.path}`}
+          githubUrl={`https://github.com/${owner}/${repo}/blob/${branch}/content/docs/${page.path}`}
           lang={lang}
         />
       </div>
