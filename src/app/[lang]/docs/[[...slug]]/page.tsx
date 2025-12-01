@@ -23,7 +23,11 @@ export default async function Page(props: {
     <DocsPage
       toc={page.data.toc}
       full={page.data.full}
-      tableOfContent={{ style: 'clerk', enabled: true }}
+      tableOfContent={{
+        style: 'clerk',
+        // Disable TOC in 'full' mode (OpenAPI page) to enable two-column layout
+        enabled: !page.data.full,
+      }}
     >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
