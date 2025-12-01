@@ -1,5 +1,0 @@
-{
-  "title": "Claude 格式 (Messages)",
-  "description": "Anthropic Claude Messages 兼容接口",
-  "pages": ["createMessage"]
-}

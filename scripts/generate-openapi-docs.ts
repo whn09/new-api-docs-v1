@@ -1,39 +1,119 @@
-import { generateFiles } from 'fumadocs-openapi';
+import { generateFiles, type OperationOutput } from 'fumadocs-openapi';
 import { createOpenAPI } from 'fumadocs-openapi/server';
 import { OPENAPI_URLS } from '../src/lib/openapi';
+import { aiModelTagMapping, managementTagMapping } from './tag-mapping';
+
+// Type for OpenAPI operation object
+interface OperationObject {
+  tags?: string[];
+  operationId?: string;
+  description?: string;
+  summary?: string;
+  [key: string]: unknown;
+}
+
+interface PathItemObject {
+  description?: string;
+  [key: string]: unknown;
+}
+
+/**
+ * Convert a tag path to English folder path
+ * Handles nested tags like "视频生成/Kling格式" -> "video-generation/kling"
+ */
+function convertTagToEnglish(
+  tag: string,
+  mapping: Record<string, string>
+): string {
+  // Split by / to handle nested tags
+  const parts = tag.split('/');
+  const convertedParts = parts.map((part) => mapping[part] || part);
+  return convertedParts.join('/');
+}
 
 async function generate() {
-  // Generate AI Model API docs
+  // Generate AI Model API docs with custom path control
   await generateFiles({
     input: createOpenAPI({ input: [OPENAPI_URLS.aiModel] }),
     output: './content/docs/zh/api/ai-model',
-    per: 'operation',
-    groupBy: 'tag',
+    per: 'custom',
     includeDescription: true,
     addGeneratedComment: true,
+    toPages(builder) {
+      const items = builder.extract();
+
+      for (const op of items.operations) {
+        const extracted = builder.fromExtractedOperation(op);
+        if (!extracted) continue;
+
+        const pathItem = extracted.pathItem as unknown as PathItemObject;
+        const operation = extracted.operation as unknown as OperationObject;
+        const { displayName } = extracted;
+
+        const tag = operation.tags?.[0] || 'default';
+        const englishTag = convertTagToEnglish(tag, aiModelTagMapping);
+        const operationId =
+          operation.operationId ||
+          `${op.path.replace(/\//g, '-').replace(/^-/, '')}-${op.method}`;
+
+        const entry: OperationOutput = {
+          type: 'operation',
+          schemaId: builder.id,
+          item: op,
+          path: `${englishTag}/${operationId}.mdx`,
+          info: {
+            title: displayName,
+            description: operation.description || pathItem.description,
+          },
+        };
+
+        builder.create(entry);
+      }
+    },
   });
   console.log('✅ AI Model API docs generated!');
 
-  // Generate Management API docs
-  // api.json doesn't have operationId, so we need to simplify file names
+  // Generate Management API docs with custom path control
   await generateFiles({
     input: createOpenAPI({ input: [OPENAPI_URLS.management] }),
     output: './content/docs/zh/api/management',
-    per: 'operation',
-    groupBy: 'tag',
+    per: 'custom',
     includeDescription: true,
     addGeneratedComment: true,
-    // Simplify file names since api.json doesn't have operationId
-    name(output) {
-      if (output.type !== 'operation') return output.path;
-      // Convert route path to simple file name
-      // e.g., /api/about -> about, /api/user/login -> user-login
-      const path = output.item.path
-        .replace(/^\/api\//, '') // Remove /api/ prefix
-        .replace(/\/+$/, '') // Remove trailing slashes to avoid double dashes
-        .replace(/\//g, '-') // Replace remaining slashes with dashes
-        .replace(/[{}]/g, ''); // Remove path parameter brackets
-      return `${path}-${output.item.method}`;
+    toPages(builder) {
+      const items = builder.extract();
+
+      for (const op of items.operations) {
+        const extracted = builder.fromExtractedOperation(op);
+        if (!extracted) continue;
+
+        const pathItem = extracted.pathItem as unknown as PathItemObject;
+        const operation = extracted.operation as unknown as OperationObject;
+        const { displayName } = extracted;
+
+        const tag = operation.tags?.[0] || 'default';
+        const englishTag = convertTagToEnglish(tag, managementTagMapping);
+        // Convert route path to simple file name
+        const fileName = op.path
+          .replace(/^\/api\//, '')
+          .replace(/\/+$/, '')
+          .replace(/\//g, '-')
+          .replace(/[{}]/g, '')
+          .replace(/^-/, '');
+
+        const entry: OperationOutput = {
+          type: 'operation',
+          schemaId: builder.id,
+          item: op,
+          path: `${englishTag}/${fileName}-${op.method}.mdx`,
+          info: {
+            title: displayName,
+            description: operation.description || pathItem.description,
+          },
+        };
+
+        builder.create(entry);
+      }
     },
   });
   console.log('✅ Management API docs generated!');
