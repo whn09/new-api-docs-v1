@@ -21,6 +21,8 @@ export const docs = defineDocs({
 });
 
 export default defineConfig({
+  // Enable last modified time from git
+  lastModifiedTime: 'git',
   mdxOptions: {
     // MDX options
   },
