@@ -41,8 +41,7 @@ const footerContent: Record<
           { label: '使用指南', href: 'docs/guide/home' },
           {
             label: 'API 文档',
-            href: 'https://apifox.newapi.ai/',
-            external: true,
+            href: 'docs/api',
           },
         ],
       },
@@ -158,8 +157,7 @@ const footerContent: Record<
           { label: 'User Guide', href: 'docs/guide/home' },
           {
             label: 'API Docs',
-            href: 'https://apifox.newapi.ai/',
-            external: true,
+            href: 'docs/api',
           },
         ],
       },
@@ -275,8 +273,7 @@ const footerContent: Record<
           { label: 'ユーザーガイド', href: 'docs/guide/home' },
           {
             label: 'APIドキュメント',
-            href: 'https://apifox.newapi.ai/',
-            external: true,
+            href: 'docs/api',
           },
         ],
       },
