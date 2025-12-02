@@ -1,6 +1,6 @@
 {
   "title": "システム設定",
-  "icon": "Sliders",
+  "icon": "SlidersHorizontal",
   "pages": [
     "option-get",
     "option-put",

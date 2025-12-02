@@ -1,5 +1,5 @@
 {
   "title": "統計",
-  "icon": "BarChart3",
+  "icon": "ChartBar",
   "pages": ["data-get", "data-self-get"]
 }

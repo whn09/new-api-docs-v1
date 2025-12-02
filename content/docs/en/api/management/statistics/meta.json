@@ -1,5 +1,5 @@
 {
   "title": "Statistics",
-  "icon": "BarChart3",
+  "icon": "ChartBar",
   "pages": ["data-get", "data-self-get"]
 }
