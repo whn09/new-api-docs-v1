@@ -14,6 +14,8 @@ const contentMap: Record<
     github: string;
     partnersTitle: string;
     partnersSubtitle: string;
+    devContributorsTitle: string;
+    docsContributorsTitle: string;
   }
 > = {
   en: {
@@ -25,6 +27,8 @@ const contentMap: Record<
     github: 'GitHub',
     partnersTitle: 'Our Partners & Clients',
     partnersSubtitle: 'In no particular order',
+    devContributorsTitle: 'Development Contributors',
+    docsContributorsTitle: 'Documentation Contributors',
   },
   zh: {
     badge: '人工智能应用基座',
@@ -35,6 +39,8 @@ const contentMap: Record<
     github: 'GitHub',
     partnersTitle: '我们的合作伙伴与客户',
     partnersSubtitle: '排名不分先后',
+    devContributorsTitle: '开发贡献者',
+    docsContributorsTitle: '文档贡献者',
   },
   ja: {
     badge: 'あなたの AI ユニバースの基盤',
@@ -45,6 +51,8 @@ const contentMap: Record<
     github: 'GitHub',
     partnersTitle: '私たちのパートナーとお客様',
     partnersSubtitle: '順不同',
+    devContributorsTitle: '開発貢献者',
+    docsContributorsTitle: 'ドキュメント貢献者',
   },
 } as const;
 
@@ -145,6 +153,50 @@ export default async function Page({
               />
             </a>
           ))}
+        </div>
+      </section>
+
+      {/* Development Contributors Section */}
+      <section className="mx-auto mt-16 max-w-[1400px] px-4 text-center">
+        <h2 className="text-2xl font-semibold md:text-3xl">
+          {content.devContributorsTitle}
+        </h2>
+        <div className="mt-8 flex justify-center">
+          <a
+            href="https://github.com/QuantumNous/new-api/graphs/contributors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://contrib.rocks/image?repo=QuantumNous/new-api"
+              alt="Development Contributors"
+              loading="lazy"
+              decoding="async"
+              className="max-w-full"
+            />
+          </a>
+        </div>
+      </section>
+
+      {/* Documentation Contributors Section */}
+      <section className="mx-auto mt-16 max-w-[1400px] px-4 text-center">
+        <h2 className="text-2xl font-semibold md:text-3xl">
+          {content.docsContributorsTitle}
+        </h2>
+        <div className="mt-8 flex justify-center">
+          <a
+            href="https://github.com/QuantumNous/new-api-docs-v1/graphs/contributors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://contrib.rocks/image?repo=QuantumNous/new-api-docs-v1"
+              alt="Documentation Contributors"
+              loading="lazy"
+              decoding="async"
+              className="max-w-full"
+            />
+          </a>
         </div>
       </section>
     </main>
