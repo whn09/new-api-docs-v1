@@ -1,97 +1,81 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.3",
   "info": {
-    "title": "AI模型接口",
-    "description": "",
-    "version": "1.0.0"
+    "title": "NewAPI - AI模型接口",
+    "description": "AI 模型接口聚合服务，支持多种 AI 模型的统一调用。\n\n## 支持的 API 格式\n- **OpenAI 格式**: Chat Completions, Responses, Embeddings, Audio 等\n- **Anthropic Claude 格式**: Messages API\n- **Google Gemini 格式**: generateContent API\n- **视频生成**: 支持可灵、即梦等视频生成模型\n\n## 认证方式\n使用 Bearer Token 认证，在请求头中添加：\n```\nAuthorization: Bearer sk-xxxxxx\n```",
+    "version": "1.0.0",
+    "contact": {
+      "name": "NewAPI"
+    }
   },
+  "servers": [
+    {
+      "url": "https://docs.newapi.ai",
+      "description": "NewAPI 文档"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
   "tags": [
     {
-      "name": "模型（Models）"
+      "name": "模型（Models）",
+      "description": "模型列表相关接口"
     },
     {
-      "name": "模型（Models）/列出模型"
+      "name": "聊天（Chat）",
+      "description": "聊天对话相关接口"
     },
     {
-      "name": "聊天（Chat）"
+      "name": "图像（Images）",
+      "description": "图像生成相关接口"
     },
     {
-      "name": "聊天（Chat）/原生OpenAI格式"
+      "name": "视频（Videos）",
+      "description": "视频生成相关接口"
     },
     {
-      "name": "聊天（Chat）/原生Gemini格式"
+      "name": "嵌入（Embeddings）",
+      "description": "向量嵌入相关接口"
     },
     {
-      "name": "补全（Completions）"
+      "name": "音频（Audio）",
+      "description": "音频处理相关接口"
     },
     {
-      "name": "图像（Images）"
+      "name": "补全（Completions）",
+      "description": "文本补全相关接口"
     },
     {
-      "name": "图像（Images）/原生OpenAI格式"
+      "name": "实时语音（Realtime）",
+      "description": "实时语音对话接口"
     },
     {
-      "name": "图像（Images）/通义千问格式"
+      "name": "重排序（Rerank）",
+      "description": "文档重排序接口"
     },
     {
-      "name": "图像（Images）/Nano Banana"
+      "name": "审查（Moderations）",
+      "description": "内容审核接口"
     },
     {
-      "name": "视频（Videos）"
+      "name": "未实现（Unimplemented）/文件（Files）",
+      "description": "文件管理接口（未实现）"
     },
     {
-      "name": "视频（Videos）/Sora格式"
-    },
-    {
-      "name": "视频（Videos）/可灵格式"
-    },
-    {
-      "name": "视频（Videos）/即梦格式"
-    },
-    {
-      "name": "音频（Audio）"
-    },
-    {
-      "name": "音频（Audio）/原生OpenAI格式"
-    },
-    {
-      "name": "实时语音（Realtime）"
-    },
-    {
-      "name": "嵌入（Embeddings）"
-    },
-    {
-      "name": "重排序（Rerank）"
-    },
-    {
-      "name": "审查（Moderations）"
-    },
-    {
-      "name": "未实现（Unimplemented）"
-    },
-    {
-      "name": "未实现（Unimplemented）/微调（Fine-tuning）"
-    },
-    {
-      "name": "未实现（Unimplemented）/文件（Files）"
-    },
-    {
-      "name": "图像（Images）/通义千问OpenAI格式"
-    },
-    {
-      "name": "图像（Images）/原生Gemini格式"
+      "name": "未实现（Unimplemented）/微调（Fine-tuning）",
+      "description": "微调相关接口（未实现）"
     }
   ],
   "paths": {
     "/v1/models": {
       "get": {
-        "summary": "原生OpenAI格式",
-        "deprecated": false,
-        "description": "获取当前可用的模型列表。\n\n根据请求头自动识别返回格式：\n- 包含 `x-api-key` 和 `anthropic-version` 头时返回 Anthropic 格式\n- 包含 `x-goog-api-key` 头或 `key` 查询参数时返回 Gemini 格式\n- 其他情况返回 OpenAI 格式\n",
+        "tags": ["模型（Models）"],
+        "summary": "列出模型 (OpenAI格式)",
+        "description": "获取当前可用的模型列表。\n\n根据请求头自动识别返回格式：\n- 包含 `x-api-key` 和 `anthropic-version` 头时返回 Anthropic 格式\n- 包含 `x-goog-api-key` 头或 `key` 查询参数时返回 Gemini 格式\n- 其他情况返回 OpenAI 格式",
         "operationId": "listModels",
-        "tags": [
-          "模型（Models）/列出模型"
-        ],
         "parameters": [
           {
             "name": "key",
@@ -107,7 +91,6 @@
             "in": "header",
             "description": "Anthropic API Key (用于 Claude 格式)",
             "required": false,
-            "example": "",
             "schema": {
               "type": "string"
             }
@@ -117,7 +100,6 @@
             "in": "header",
             "description": "Anthropic API 版本",
             "required": false,
-            "example": "",
             "schema": {
               "type": "string",
               "example": "2023-06-01"
@@ -128,7 +110,6 @@
             "in": "header",
             "description": "Google API Key (用于 Gemini 格式)",
             "required": false,
-            "example": "",
             "schema": {
               "type": "string"
             }
@@ -143,8 +124,7 @@
                   "$ref": "#/components/schemas/ModelsResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           },
           "401": {
             "description": "认证失败",
@@ -154,27 +134,17 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1beta/models": {
       "get": {
-        "summary": "原生Gemini格式",
-        "deprecated": false,
+        "tags": ["模型（Models）"],
+        "summary": "列出模型 (Gemini格式)",
         "description": "以 Gemini API 格式返回可用模型列表",
         "operationId": "listModelsGemini",
-        "tags": [
-          "模型（Models）/列出模型"
-        ],
-        "parameters": [],
         "responses": {
           "200": {
             "description": "成功获取模型列表",
@@ -184,266 +154,86 @@
                   "$ref": "#/components/schemas/GeminiModelsResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/chat/completions": {
       "post": {
-        "summary": "OpenAI聊天格式",
-        "deprecated": false,
-        "description": "Gemini 图片生成",
-        "operationId": "geminiRelayV1Beta",
-        "tags": [
-          "图像（Images）/Nano Banana",
-          "图像（Images）/原生Gemini格式"
-        ],
-        "parameters": [],
+        "tags": ["聊天（Chat）/原生OpenAI格式"],
+        "summary": "创建聊天补全 (OpenAI格式)",
+        "description": "根据对话历史创建模型响应。支持流式和非流式响应。\n\n兼容 OpenAI Chat Completions API。",
+        "operationId": "createChatCompletion",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "model": {
-                    "type": "string"
-                  },
-                  "stream": {
-                    "type": "boolean"
-                  },
-                  "messages": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "role": {
-                          "type": "string"
-                        },
-                        "content": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  },
-                  "extra_body": {
-                    "type": "object",
-                    "properties": {
-                      "google": {
-                        "type": "object",
-                        "properties": {
-                          "image_config": {
-                            "type": "object",
-                            "properties": {
-                              "aspect_ratio": {
-                                "type": "string"
-                              },
-                              "image_size": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "aspect_ratio",
-                              "image_size"
-                            ]
-                          }
-                        },
-                        "required": [
-                          "image_config"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "google"
-                    ]
-                  },
-                  "contents": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "role": {
-                          "type": "string"
-                        },
-                        "parts": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "text": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "required": [
-                  "model",
-                  "stream",
-                  "messages",
-                  "contents"
-                ]
-              },
-              "example": {
-                "model": "gemini-3-pro-image-preview",
-                "stream": false,
-                "messages": [
-                  {
-                    "role": "user",
-                    "content": "draw a cat"
-                  }
-                ],
-                "extra_body": {
-                  "google": {
-                    "image_config": {
-                      "aspect_ratio": "16:9",
-                      "image_size": "2K"
-                    }
-                  }
-                }
+                "$ref": "#/components/schemas/ChatCompletionRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "成功",
+            "description": "成功创建响应",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "model": {
-                      "type": "string"
-                    },
-                    "object": {
-                      "type": "string"
-                    },
-                    "created": {
-                      "type": "integer"
-                    },
-                    "choices": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "index": {
-                            "type": "integer"
-                          },
-                          "message": {
-                            "type": "object",
-                            "properties": {
-                              "role": {
-                                "type": "string"
-                              },
-                              "content": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "role",
-                              "content"
-                            ]
-                          },
-                          "finish_reason": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "usage": {
-                      "type": "object",
-                      "properties": {
-                        "prompt_tokens": {
-                          "type": "integer"
-                        },
-                        "completion_tokens": {
-                          "type": "integer"
-                        },
-                        "total_tokens": {
-                          "type": "integer"
-                        }
-                      },
-                      "required": [
-                        "prompt_tokens",
-                        "completion_tokens",
-                        "total_tokens"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "model",
-                    "object",
-                    "created",
-                    "choices",
-                    "usage"
-                  ]
-                },
-                "example": {
-                  "id": "chatcmpl-20251211160744809365000fdOhL0KY",
-                  "model": "gemini-3-pro-image-preview",
-                  "object": "chat.completion",
-                  "created": 1765440499,
-                  "choices": [
-                    {
-                      "index": 0,
-                      "message": {
-                        "role": "assistant",
-                        "content": "![image](data:image/jpeg;base64,图片base64)"
-                      },
-                      "finish_reason": "stop"
-                    }
-                  ],
-                  "usage": {
-                    "prompt_tokens": 4,
-                    "completion_tokens": 1359,
-                    "total_tokens": 1363
-                  }
+                  "$ref": "#/components/schemas/ChatCompletionResponse"
                 }
               }
-            },
-            "headers": {}
+            }
+          },
+          "400": {
+            "description": "请求参数错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "认证失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "请求频率限制",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/responses": {
       "post": {
-        "summary": "Responses格式",
-        "deprecated": false,
-        "description": "OpenAI Responses API，用于创建模型响应。\n支持多轮对话、工具调用、推理等功能。\n",
+        "tags": ["聊天（Chat）/原生OpenAI格式"],
+        "summary": "创建响应 (OpenAI Responses格式)",
+        "description": "OpenAI Responses API，用于创建模型响应。\n支持多轮对话、工具调用、推理等功能。",
         "operationId": "createResponse",
-        "tags": [
-          "聊天（Chat）/原生OpenAI格式"
-        ],
-        "parameters": [],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ResponsesRequest"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -454,131 +244,139 @@
                   "$ref": "#/components/schemas/ResponsesResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1beta/models/{model}:generateContent": {
       "post": {
-        "summary": "原生Gemini格式",
-        "deprecated": false,
-        "description": "Gemini 音频生成接口。\n可使用gemini-2.5-flash-preview-tts等模型",
-        "operationId": "geminiRelayV1Beta",
-        "tags": [
-          "音频（Audio）"
-        ],
+        "tags": ["聊天（Chat）/原生Gemini格式"],
+        "summary": "Gemini 内容生成",
+        "description": "代理 Gemini API 请求，支持文本聊天和媒体识别。\n\n路径格式: `/v1beta/models/{model_name}:generateContent`\n\n支持的功能：\n- 文本对话\n- 多轮对话\n- 图片识别（通过 inlineData base64）\n- PDF识别\n- 视频识别\n- 音频识别\n\n⚠️注意：仅支持通过 inlineData 以 base64 方式上传媒体，不支持 fileData.fileUri 或 File API。",
+        "operationId": "geminiGenerateContent",
         "parameters": [
           {
             "name": "model",
             "in": "path",
-            "description": "模型名称",
             "required": true,
-            "example": "gemini-2.5-flash-preview-tts",
+            "description": "模型名称",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "gemini-2.5-pro"
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "contents": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "parts": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "text": {
-                                "type": "string"
-                              }
-                            }
+                "$ref": "#/components/schemas/GeminiRequest"
+              },
+              "examples": {
+                "对话": {
+                  "summary": "简单对话",
+                  "value": {
+                    "contents": [
+                      {
+                        "role": "user",
+                        "parts": [
+                          {
+                            "text": "Hi"
                           }
-                        }
-                      }
-                    }
-                  },
-                  "generationConfig": {
-                    "type": "object",
-                    "properties": {
-                      "responseModalities": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "speechConfig": {
-                        "type": "object",
-                        "properties": {
-                          "voiceConfig": {
-                            "type": "object",
-                            "properties": {
-                              "prebuiltVoiceConfig": {
-                                "type": "object",
-                                "properties": {
-                                  "voiceName": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "voiceName"
-                                ]
-                              }
-                            },
-                            "required": [
-                              "prebuiltVoiceConfig"
-                            ]
-                          }
-                        },
-                        "required": [
-                          "voiceConfig"
                         ]
                       }
-                    },
-                    "required": [
-                      "responseModalities",
-                      "speechConfig"
                     ]
                   }
                 },
-                "required": [
-                  "contents",
-                  "generationConfig"
-                ]
-              },
-              "example": {
-                "contents": [
-                  {
-                    "parts": [
+                "多轮对话": {
+                  "summary": "多轮对话",
+                  "value": {
+                    "contents": [
                       {
-                        "text": "Say cheerfully: Have a wonderful day!"
+                        "role": "user",
+                        "parts": [{"text": "Hello"}]
+                      },
+                      {
+                        "role": "model",
+                        "parts": [{"text": "Great to meet you. What would you like to know?"}]
+                      },
+                      {
+                        "role": "user",
+                        "parts": [{"text": "I have two dogs in my house. How many paws are in my house?"}]
                       }
                     ]
                   }
-                ],
-                "generationConfig": {
-                  "responseModalities": [
-                    "AUDIO"
-                  ],
-                  "speechConfig": {
-                    "voiceConfig": {
-                      "prebuiltVoiceConfig": {
-                        "voiceName": "Kore"
+                },
+                "图片识别": {
+                  "summary": "图片识别",
+                  "value": {
+                    "contents": [
+                      {
+                        "role": "user",
+                        "parts": [
+                          {"text": "Tell me about this instrument"},
+                          {"inlineData": {"mimeType": "image/jpeg", "data": "图片base64"}}
+                        ]
                       }
-                    }
+                    ]
+                  }
+                },
+                "PDF识别": {
+                  "summary": "PDF文档识别",
+                  "value": {
+                    "contents": [
+                      {
+                        "role": "user",
+                        "parts": [
+                          {"text": "Can you add a few more lines to this poem?"},
+                          {"inlineData": {"mimeType": "application/pdf", "data": "PDF文件base64"}}
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "视频识别": {
+                  "summary": "视频内容识别",
+                  "value": {
+                    "contents": [
+                      {
+                        "role": "user",
+                        "parts": [
+                          {"text": "Transcribe the audio from this video and provide visual descriptions."},
+                          {"inlineData": {"mimeType": "video/mp4", "data": "视频Base64"}}
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "音频识别": {
+                  "summary": "音频内容识别",
+                  "value": {
+                    "contents": [
+                      {
+                        "role": "user",
+                        "parts": [
+                          {"text": "Please describe this audio file."},
+                          {"inlineData": {"mimeType": "audio/mpeg", "data": "音频base64"}}
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "YouTube视频识别": {
+                  "summary": "YouTube视频识别",
+                  "value": {
+                    "contents": [
+                      {
+                        "role": "user",
+                        "parts": [
+                          {"text": "Please summarize the video in 3 sentences."},
+                          {"fileData": {"fileUri": "https://www.youtube.com/watch?v=9hE5-98ZeCg", "mimeType": "video/webm"}}
+                        ]
+                      }
+                    ]
                   }
                 }
               }
@@ -594,33 +392,23 @@
                   "$ref": "#/components/schemas/GeminiResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/messages": {
       "post": {
-        "summary": "原生Claude格式",
-        "deprecated": false,
-        "description": "Anthropic Claude Messages API 格式的请求。\n需要在请求头中包含 `anthropic-version`。\n",
+        "tags": ["聊天（Chat）/原生Claude格式"],
+        "summary": "创建消息 (Claude格式)",
+        "description": "Anthropic Claude Messages API 格式的请求。\n需要在请求头中包含 `anthropic-version`。",
         "operationId": "createMessage",
-        "tags": [
-          "聊天（Chat）"
-        ],
         "parameters": [
           {
             "name": "anthropic-version",
             "in": "header",
-            "description": "Anthropic API 版本",
             "required": true,
-            "example": "",
+            "description": "Anthropic API 版本",
             "schema": {
               "type": "string",
               "example": "2023-06-01"
@@ -629,21 +417,20 @@
           {
             "name": "x-api-key",
             "in": "header",
-            "description": "Anthropic API Key (可选，也可使用 Bearer Token)",
             "required": false,
-            "example": "",
+            "description": "Anthropic API Key (可选，也可使用 Bearer Token)",
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ClaudeRequest"
-              },
-              "examples": {}
+              }
             }
           }
         },
@@ -656,160 +443,38 @@
                   "$ref": "#/components/schemas/ClaudeResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
-    "/v1/images/generations/": {
+    "/v1/images/generations": {
       "post": {
+        "tags": ["图像（Images）/原生OpenAI格式"],
         "summary": "生成图像",
-        "deprecated": false,
-        "description": "在给定提示的情况下创建图像。[了解更多](https://platform.openai.com/docs/guides/images)。",
-        "tags": [
-          "图像（Images）/原生OpenAI格式"
-        ],
-        "parameters": [],
+        "description": "根据文本提示生成图像",
+        "operationId": "createImage",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "model": {
-                    "type": "string",
-                    "description": "用于图像生成的模型。`dall-e-2`、`dall-e-3` 或 `gpt-image-1` 之一。默认为 `dall-e-2`，除非使用特定于 `gpt-image-1` 的参数。"
-                  },
-                  "prompt": {
-                    "type": "string",
-                    "description": "所需图像的文本描述。`gpt-image-1` 的最大长度为 32000 个字符，`dall-e-2` 的最大长度为 1000 个字符，`dall-e-3` 的最大长度为 4000 个字符。"
-                  },
-                  "n": {
-                    "type": "integer",
-                    "description": "要生成的图像数量。必须介于 1 到 10 之间。对于 `dall-e-3`，仅支持 `n=1`。"
-                  },
-                  "size": {
-                    "type": "string",
-                    "description": "生成的图像的大小。`对于 gpt-image-1`，必须是 `1024x1024`、`1536x1024`（横向）、`1024x1536`（纵向）或`自动`（默认值）之一，`对于 dall-e-2`，必须是 `256x256、``512x512` 或 `1024x1024` 之一，对于 `dall-e-3`，必须是 `1024x1024`、`1792x1024` 或 `1024x1792` 之一。"
-                  },
-                  "background": {
-                    "type": "string",
-                    "description": "允许为生成的图像的背景设置透明度。此参数仅支持 `gpt-image-1`。必须是以下之一 `透明`、`不透明`或`自动`（默认值）。使用`自动`时，模型将自动确定图像的最佳背景。\n\n如果`是透明`的，则输出格式需要支持透明度，因此应将其设置为 `png`（默认值）或 `webp`。"
-                  },
-                  "moderation": {
-                    "type": "string",
-                    "description": "控制 `gpt-image-1` 生成的图像的内容审核级别。必须为`低，` 以进行限制较少的筛选或`自动`（默认值）。"
-                  },
-                  "quality": {
-                    "type": "string",
-                    "description": "将生成的图像的质量。"
-                  },
-                  "stream": {
-                    "type": "string"
-                  },
-                  "style": {
-                    "type": "string"
-                  },
-                  "user": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "prompt"
-                ]
-              },
-              "example": {
-                "model": "gpt-image-1",
-                "prompt": "A cute baby sea otter",
-                "n": 1,
-                "size": "1024x1024"
+                "$ref": "#/components/schemas/ImageGenerationRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "成功生成图像",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "created": {
-                      "type": "integer"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "b64_json": {
-                            "type": "string"
-                          },
-                          "url": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "url"
-                        ]
-                      }
-                    },
-                    "usage": {
-                      "type": "object",
-                      "properties": {
-                        "total_tokens": {
-                          "type": "integer"
-                        },
-                        "input_tokens": {
-                          "type": "integer"
-                        },
-                        "output_tokens": {
-                          "type": "integer"
-                        },
-                        "input_tokens_details": {
-                          "type": "object",
-                          "properties": {
-                            "text_tokens": {
-                              "type": "integer"
-                            },
-                            "image_tokens": {
-                              "type": "integer"
-                            }
-                          },
-                          "required": [
-                            "text_tokens",
-                            "image_tokens"
-                          ]
-                        }
-                      },
-                      "required": [
-                        "total_tokens",
-                        "input_tokens",
-                        "output_tokens",
-                        "input_tokens_details"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "created",
-                    "data",
-                    "usage"
-                  ]
+                  "$ref": "#/components/schemas/ImageGenerationResponse"
                 },
                 "example": {
                   "created": 1713833628,
-                  "data": [
-                    {
-                      "b64_json": "..."
-                    }
-                  ],
+                  "data": [{"b64_json": "..."}],
                   "usage": {
                     "total_tokens": 100,
                     "input_tokens": 50,
@@ -821,919 +486,57 @@
                   }
                 }
               }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
-      }
-    },
-    "/v1/images/edits/": {
-      "post": {
-        "summary": "编辑图像",
-        "deprecated": false,
-        "description": "在给定原始图像和提示的情况下创建编辑或扩展图像。\n\n",
-        "tags": [
-          "图像（Images）/原生OpenAI格式"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "image": {
-                    "description": "要编辑的图像。必须是有效的 PNG 文件，小于 4MB，并且是方形的。如果未提供遮罩，图像必须具有透明度，将用作遮罩。",
-                    "type": "string",
-                    "format": "binary",
-                    "example": "cmMtdXBsb2FkLTE2ODc4MzMzNDc3NTEtMjA=/31225951_59371037e9_small.png"
-                  },
-                  "mask": {
-                    "description": "附加图像，其完全透明区域（例如，alpha 为零的区域）指示image应编辑的位置。必须是有效的 PNG 文件，小于 4MB，并且尺寸与原始image相同。",
-                    "type": "string",
-                    "format": "binary",
-                    "example": []
-                  },
-                  "prompt": {
-                    "description": "所需图像的文本描述。最大长度为 1000 个字符。",
-                    "type": "string",
-                    "example": "A cute baby sea otter wearing a beret."
-                  },
-                  "n": {
-                    "description": "要生成的图像数。必须介于 1 和 10 之间。",
-                    "type": "string",
-                    "example": "1"
-                  },
-                  "size": {
-                    "description": "生成图像的大小。必须是`256x256`、`512x512`或 `1024x1024`之一。",
-                    "type": "string",
-                    "example": "1024x1024"
-                  },
-                  "response_format": {
-                    "description": "生成的图像返回的格式。必须是`url`或`b64_json`。",
-                    "type": "string",
-                    "example": "url"
-                  },
-                  "user": {
-                    "description": "代表您的最终用户的唯一标识符，可以帮助 OpenAI 监控和检测滥用行为。[了解更多](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids)。",
-                    "type": "string",
-                    "example": ""
-                  },
-                  "model": {
-                    "type": "string",
-                    "example": "dall-e-2"
-                  }
-                },
-                "required": [
-                  "image",
-                  "prompt"
-                ]
-              },
-              "examples": {}
             }
           }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
-      }
-    },
-    "/v1/images/generations": {
-      "post": {
-        "summary": "生成图像",
-        "deprecated": false,
-        "description": " 百炼qwen-image系列图片生成",
-        "operationId": "createImage",
-        "tags": [
-          "图像（Images）/通义千问格式",
-          "图像（Images）/通义千问OpenAI格式"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "model": {
-                    "type": "string"
-                  },
-                  "input": {
-                    "type": "object",
-                    "properties": {
-                      "messages": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "role": {
-                              "type": "string"
-                            },
-                            "content": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "text": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "messages"
-                    ]
-                  },
-                  "parameters": {
-                    "type": "object",
-                    "properties": {
-                      "negative_prompt": {
-                        "type": "string"
-                      },
-                      "prompt_extend": {
-                        "type": "boolean"
-                      },
-                      "watermark": {
-                        "type": "boolean"
-                      },
-                      "size": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                },
-                "required": [
-                  "model",
-                  "input"
-                ]
-              },
-              "example": {
-                "model": "qwen-image-plus",
-                "input": {
-                  "messages": [
-                    {
-                      "role": "user",
-                      "content": [
-                        {
-                          "text": "一副典雅庄重的对联悬挂于厅堂之中，房间是个安静古典的中式布置，桌子上放着一些青花瓷，对联上左书“义本生知人机同道善思新”，右书“通云赋智乾坤启数高志远”， 横批“智启通义”，字体飘逸，在中间挂着一幅中国风的画作，内容是岳阳楼。"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "parameters": {
-                  "negative_prompt": "",
-                  "prompt_extend": true,
-                  "watermark": false,
-                  "size": "1328*1328"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "成功生成图像",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ImageResponse"
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/images/edits": {
       "post": {
+        "tags": ["图像（Images）/原生OpenAI格式"],
         "summary": "编辑图像",
-        "deprecated": false,
-        "description": " 百炼qwen-image系列图片编辑",
-        "operationId": "editImage",
-        "tags": [
-          "图像（Images）/通义千问格式",
-          "图像（Images）/通义千问OpenAI格式"
-        ],
-        "parameters": [],
+        "description": "根据文本提示编辑图像",
+        "operationId": "createImageEdit",
         "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "model": {
-                    "type": "string"
-                  },
-                  "input": {
-                    "type": "object",
-                    "properties": {
-                      "messages": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "role": {
-                              "type": "string"
-                            },
-                            "content": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "image": {
-                                    "type": "string"
-                                  },
-                                  "text": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "messages"
-                    ]
-                  },
-                  "parameters": {
-                    "type": "object",
-                    "properties": {
-                      "n": {
-                        "type": "integer"
-                      },
-                      "negative_prompt": {
-                        "type": "string"
-                      },
-                      "prompt_extend": {
-                        "type": "boolean"
-                      },
-                      "watermark": {
-                        "type": "boolean"
-                      },
-                      "size": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                },
-                "required": [
-                  "model",
-                  "input"
-                ]
-              },
-              "example": "{\n    \"model\": \"qwen-image-edit-plus\",\n    \"input\": {\n        \"messages\": [\n            {\n                \"role\": \"user\",\n                \"content\": [\n                    {\n                        \"image\": \"https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250925/fpakfo/image36.webp\"\n                    },\n                    {\n                        \"text\": \"生成一张符合深度图的图像，遵循以下描述：一辆红色的破旧的自行车停在一条泥泞的小路上，背景是茂密的原始森林\"\n                    }\n                ]\n            }\n        ]\n    },\n    \"parameters\": {\n        \"n\": 2,\n        \"negative_prompt\": \" \",\n        \"prompt_extend\": true,\n        \"watermark\": false\n    }"
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "成功生成图像",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ImageResponse"
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
-      }
-    },
-    "/v1beta/models/{model}:generateContent/": {
-      "post": {
-        "summary": "Gemini原生格式",
-        "deprecated": false,
-        "description": "Gemini 图片生成",
-        "operationId": "geminiRelayV1Beta",
-        "tags": [
-          "图像（Images）/Nano Banana",
-          "图像（Images）/原生Gemini格式"
-        ],
-        "parameters": [
-          {
-            "name": "model",
-            "in": "path",
-            "description": "模型名称",
-            "required": true,
-            "example": "gemini-3-pro-image-preview",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "contents": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "role": {
-                          "type": "string"
-                        },
-                        "parts": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "text": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "generationConfig": {
-                    "type": "object",
-                    "properties": {
-                      "thinkingConfig": {
-                        "type": "object",
-                        "properties": {
-                          "includeThoughts": {
-                            "type": "boolean",
-                            "description": "是否返回思考内容"
-                          }
-                        },
-                        "required": [
-                          "includeThoughts"
-                        ]
-                      },
-                      "responseModalities": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "imageConfig": {
-                        "type": "object",
-                        "properties": {
-                          "aspectRatio": {
-                            "type": "string"
-                          },
-                          "imageSize": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "aspectRatio",
-                          "imageSize"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "responseModalities",
-                      "imageConfig"
-                    ]
-                  }
-                },
-                "required": [
-                  "contents",
-                  "generationConfig"
-                ]
-              },
-              "examples": {
-                "1": {
-                  "value": {
-                    "contents": [
-                      {
-                        "role": "user",
-                        "parts": [
-                          {
-                            "text": "draw a cat"
-                          }
-                        ]
-                      }
-                    ],
-                    "generationConfig": {
-                      "responseModalities": [
-                        "TEXT",
-                        "IMAGE"
-                      ],
-                      "imageConfig": {
-                        "aspectRatio": "16:9",
-                        "imageSize": "4K"
-                      }
-                    }
-                  },
-                  "summary": "绘图"
-                },
-                "2": {
-                  "value": {
-                    "contents": [
-                      {
-                        "role": "user",
-                        "parts": [
-                          {
-                            "text": "draw a cat"
-                          }
-                        ]
-                      }
-                    ],
-                    "generationConfig": {
-                      "thinkingConfig": {
-                        "includeThoughts": true
-                      },
-                      "responseModalities": [
-                        "TEXT",
-                        "IMAGE"
-                      ],
-                      "imageConfig": {
-                        "aspectRatio": "16:9",
-                        "imageSize": "4K"
-                      }
-                    }
-                  },
-                  "summary": "返回思考内容"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GeminiResponse"
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
-      }
-    },
-    "/v1/videos": {
-      "post": {
-        "summary": "创建视频 ",
-        "deprecated": false,
-        "description": "OpenAI 兼容的视频生成接口。\n\n参考文档: https://platform.openai.com/docs/api-reference/videos/create\n",
-        "operationId": "createVideo",
-        "tags": [
-          "视频（Videos）/Sora格式"
-        ],
-        "parameters": [],
-        "requestBody": {
+          "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "model": {
-                    "description": "模型名称",
-                    "example": "sora-2",
-                    "type": "string"
-                  },
-                  "prompt": {
-                    "description": "提示词",
-                    "example": "cute cat dance",
-                    "type": "string"
-                  },
-                  "seconds": {
-                    "description": "生成秒数",
-                    "example": "8",
-                    "type": "string"
-                  },
-                  "input_reference": {
-                    "format": "binary",
-                    "type": "string",
-                    "description": "参考图片文件",
-                    "example": ""
-                  }
-                }
-              },
-              "examples": {}
+                "$ref": "#/components/schemas/ImageEditRequest"
+              }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "成功创建视频任务",
+            "description": "成功编辑图像",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "视频 ID"
-                    },
-                    "object": {
-                      "type": "string",
-                      "description": "对象类型"
-                    },
-                    "model": {
-                      "type": "string",
-                      "description": "使用的模型"
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "任务状态"
-                    },
-                    "progress": {
-                      "type": "integer",
-                      "description": "进度百分比"
-                    },
-                    "created_at": {
-                      "type": "integer",
-                      "description": "创建时间戳"
-                    },
-                    "seconds": {
-                      "type": "string",
-                      "description": "视频时长"
-                    },
-                    "completed_at": {
-                      "type": "integer",
-                      "description": "完成时间戳"
-                    },
-                    "expires_at": {
-                      "type": "integer",
-                      "description": "过期时间戳"
-                    },
-                    "size": {
-                      "type": "string",
-                      "description": "视频尺寸"
-                    },
-                    "error": {
-                      "$ref": "#/components/schemas/OpenAIVideoError"
-                    },
-                    "metadata": {
-                      "type": "object",
-                      "description": "额外元数据",
-                      "additionalProperties": true,
-                      "properties": {}
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "object",
-                    "model",
-                    "status",
-                    "progress",
-                    "created_at",
-                    "seconds"
-                  ]
-                },
-                "example": {
-                  "id": "sora-2-123456",
-                  "object": "video",
-                  "model": "sora-2",
-                  "status": "queued",
-                  "progress": 0,
-                  "created_at": 1764347090922,
-                  "seconds": "8"
+                  "$ref": "#/components/schemas/ImageGenerationResponse"
                 }
               }
-            },
-            "headers": {}
-          },
-          "400": {
-            "description": "请求参数错误",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
-      }
-    },
-    "/v1/videos/{task_id}": {
-      "get": {
-        "summary": "获取视频任务状态 ",
-        "deprecated": false,
-        "description": "OpenAI 兼容的视频任务状态查询接口。\n\n返回视频任务的详细状态信息。\n",
-        "operationId": "getVideo",
-        "tags": [
-          "视频（Videos）/Sora格式"
-        ],
-        "parameters": [
-          {
-            "name": "task_id",
-            "in": "path",
-            "description": "视频任务 ID",
-            "required": true,
-            "example": "sora-2-123456",
-            "schema": {
-              "type": "string"
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "成功获取视频任务状态",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "object": {
-                      "type": "string"
-                    },
-                    "model": {
-                      "type": "string"
-                    },
-                    "status": {
-                      "type": "string"
-                    },
-                    "progress": {
-                      "type": "integer"
-                    },
-                    "created_at": {
-                      "type": "integer"
-                    },
-                    "seconds": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "object",
-                    "model",
-                    "status",
-                    "progress",
-                    "created_at",
-                    "seconds"
-                  ]
-                },
-                "example": {
-                  "id": "sora-2-123456",
-                  "object": "video",
-                  "model": "sora-2",
-                  "status": "queued",
-                  "progress": 0,
-                  "created_at": 1764347090922,
-                  "seconds": "8"
-                }
-              }
-            },
-            "headers": {}
-          },
-          "404": {
-            "description": "任务不存在",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
-    "/v1/videos/{task_id}/content": {
-      "get": {
-        "summary": "获取视频内容",
-        "deprecated": false,
-        "description": "获取已完成视频任务的视频文件内容。\n\n此接口会代理返回视频文件流。\n",
-        "operationId": "getVideoContent",
-        "tags": [
-          "视频（Videos）/Sora格式"
-        ],
-        "parameters": [
-          {
-            "name": "task_id",
-            "in": "path",
-            "description": "视频任务 ID",
-            "required": true,
-            "example": "video-abc123",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "成功获取视频内容",
-            "content": {
-              "video/mp4": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            },
-            "headers": {}
-          },
-          "404": {
-            "description": "视频不存在或未完成",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
-      }
-    },
-    "/kling/v1/videos/text2video": {
+    "/v1/video/generations": {
       "post": {
-        "summary": "Kling 文生视频",
-        "deprecated": false,
-        "description": "使用 Kling 模型从文本描述生成视频。\n\n支持的模型：kling-v1, kling-v1-5 等\n",
-        "operationId": "createKlingText2Video",
-        "tags": [
-          "视频（Videos）/可灵格式"
-        ],
-        "parameters": [],
+        "tags": ["视频（Videos）/Sora格式"],
+        "summary": "创建视频生成任务",
+        "description": "提交视频生成任务，支持文生视频和图生视频。\n\n返回任务 ID，可通过 GET 接口查询任务状态。",
+        "operationId": "createVideoGeneration",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/VideoRequest"
+                "$ref": "#/components/schemas/VideoGenerationRequest"
               },
               "example": {
                 "model": "kling-v1",
-                "prompt": "宇航员站起身走了",
-                "duration": 5,
-                "width": 1280,
-                "height": 720,
-                "fps": 30
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "成功创建视频生成任务",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/VideoResponse"
-                }
-              }
-            },
-            "headers": {}
-          },
-          "400": {
-            "description": "请求参数错误",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
-      }
-    },
-    "/kling/v1/videos/text2video/{task_id}": {
-      "get": {
-        "summary": "获取 Kling 文生视频任务状态",
-        "deprecated": false,
-        "description": "查询 Kling 文生视频任务的状态和结果。",
-        "operationId": "getKlingText2Video",
-        "tags": [
-          "视频（Videos）/可灵格式"
-        ],
-        "parameters": [
-          {
-            "name": "task_id",
-            "in": "path",
-            "description": "任务 ID",
-            "required": true,
-            "example": "task-abc123",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "成功获取任务状态",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/VideoTaskResponse"
-                }
-              }
-            },
-            "headers": {}
-          },
-          "404": {
-            "description": "任务不存在",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
-      }
-    },
-    "/kling/v1/videos/image2video": {
-      "post": {
-        "summary": "Kling 图生视频",
-        "deprecated": false,
-        "description": "使用 Kling 模型从图片生成视频。\n\n支持通过 image 参数传入图片 URL 或 Base64 编码的图片数据。\n",
-        "operationId": "createKlingImage2Video",
-        "tags": [
-          "视频（Videos）/可灵格式"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VideoRequest"
-              },
-              "example": {
-                "model": "kling-v1",
-                "prompt": "人物转身走开",
-                "image": "https://example.com/image.jpg",
+                "prompt": "宇航员在月球上漫步",
                 "duration": 5,
                 "width": 1280,
                 "height": 720
@@ -1747,11 +550,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VideoResponse"
+                  "$ref": "#/components/schemas/VideoGenerationTaskResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           },
           "400": {
             "description": "请求参数错误",
@@ -1761,36 +563,27 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
-    "/kling/v1/videos/image2video/{task_id}": {
+    "/v1/video/generations/{task_id}": {
       "get": {
-        "summary": "获取 Kling 图生视频任务状态",
-        "deprecated": false,
-        "description": "查询 Kling 图生视频任务的状态和结果。",
-        "operationId": "getKlingImage2Video",
-        "tags": [
-          "视频（Videos）/可灵格式"
-        ],
+        "tags": ["视频（Videos）/Sora格式"],
+        "summary": "获取视频生成任务状态",
+        "description": "查询视频生成任务的状态和结果。\n\n任务状态：\n- `queued`: 排队中\n- `in_progress`: 生成中\n- `completed`: 已完成\n- `failed`: 失败",
+        "operationId": "getVideoGeneration",
         "parameters": [
           {
             "name": "task_id",
             "in": "path",
-            "description": "任务 ID",
             "required": true,
-            "example": "task-abc123",
+            "description": "任务 ID",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "abcd1234efgh"
           }
         ],
         "responses": {
@@ -1799,11 +592,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VideoTaskResponse"
+                  "$ref": "#/components/schemas/VideoGenerationStatusResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           },
           "404": {
             "description": "任务不存在",
@@ -1813,57 +605,278 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
-    "/jimeng/": {
+    "/v1/videos": {
       "post": {
-        "summary": "即梦视频生成",
-        "deprecated": false,
-        "description": "即梦官方 API 格式的视频生成接口。\n\n支持通过 Action 参数指定操作类型：\n- `CVSync2AsyncSubmitTask`: 提交视频生成任务\n- `CVSync2AsyncGetResult`: 获取任务结果\n\n需要在查询参数中指定 Action 和 Version。\n",
-        "operationId": "createJimengVideo",
-        "tags": [
-          "视频（Videos）/即梦格式"
-        ],
+        "tags": ["视频（Videos）/Sora格式"],
+        "summary": "创建视频生成任务 (通用格式)",
+        "description": "提交视频生成任务",
+        "operationId": "createVideo",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VideoGenerationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功创建任务",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoGenerationTaskResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/videos/{task_id}": {
+      "get": {
+        "tags": ["视频（Videos）/Sora格式"],
+        "summary": "获取视频任务状态",
+        "operationId": "getVideoTask",
         "parameters": [
           {
-            "name": "Action",
-            "in": "query",
-            "description": "API 操作类型",
+            "name": "task_id",
+            "in": "path",
             "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "CVSync2AsyncSubmitTask",
-                "CVSync2AsyncGetResult"
-              ]
-            }
-          },
-          {
-            "name": "Version",
-            "in": "query",
-            "description": "API 版本",
-            "required": true,
-            "example": "2022-08-31",
             "schema": {
               "type": "string"
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoGenerationStatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/videos/{task_id}/content": {
+      "get": {
+        "tags": ["视频（Videos）/Sora格式"],
+        "summary": "获取视频内容",
+        "operationId": "getVideoContent",
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功获取视频内容",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kling/v1/videos/text2video": {
+      "post": {
+        "tags": ["视频（Videos）/可灵格式"],
+        "summary": "可灵文生视频",
+        "description": "使用可灵模型进行文本到视频生成",
+        "operationId": "createKlingText2Video",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "description": "即梦官方 API 请求格式",
+                "properties": {
+                  "prompt": {
+                    "type": "string",
+                    "description": "视频描述文本"
+                  },
+                  "duration": {
+                    "type": "number",
+                    "description": "视频时长"
+                  },
+                  "aspect_ratio": {
+                    "type": "string",
+                    "description": "宽高比"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功创建任务",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoGenerationTaskResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kling/v1/videos/text2video/{task_id}": {
+      "get": {
+        "tags": ["视频（Videos）/可灵格式"],
+        "summary": "获取可灵文生视频任务状态",
+        "operationId": "getKlingText2VideoTask",
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoGenerationStatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kling/v1/videos/image2video": {
+      "post": {
+        "tags": ["视频（Videos）/可灵格式"],
+        "summary": "可灵图生视频",
+        "description": "使用可灵模型进行图像到视频生成",
+        "operationId": "createKlingImage2Video",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "description": "图像 URL 或 base64"
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "description": "视频描述文本"
+                  },
+                  "duration": {
+                    "type": "number",
+                    "description": "视频时长"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功创建任务",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoGenerationTaskResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kling/v1/videos/image2video/{task_id}": {
+      "get": {
+        "tags": ["视频（Videos）/可灵格式"],
+        "summary": "获取可灵图生视频任务状态",
+        "operationId": "getKlingImage2VideoTask",
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoGenerationStatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jimeng/": {
+      "post": {
+        "tags": ["视频（Videos）/即梦格式"],
+        "summary": "即梦视频生成",
+        "description": "即梦官方 API 格式的视频生成接口。\n\n支持通过 Action 参数指定操作类型：\n- `CVSync2AsyncSubmitTask`: 提交视频生成任务\n- `CVSync2AsyncGetResult`: 获取任务结果\n\n需要在查询参数中指定 Action 和 Version。",
+        "operationId": "createJimengVideo",
+        "parameters": [
+          {
+            "name": "Action",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["CVSync2AsyncSubmitTask", "CVSync2AsyncGetResult"]
+            }
+          },
+          {
+            "name": "Version",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2022-08-31"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
                 "properties": {
                   "req_key": {
                     "type": "string",
@@ -1891,179 +904,33 @@
         },
         "responses": {
           "200": {
-            "description": "成功处理请求",
+            "description": "成功",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "integer",
-                      "description": "响应码"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "响应消息"
-                    },
-                    "data": {
-                      "type": "object",
-                      "description": "响应数据",
-                      "properties": {}
-                    }
-                  }
+                  "type": "object"
                 }
-              }
-            },
-            "headers": {}
-          },
-          "400": {
-            "description": "请求参数错误",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
-      }
-    },
-    "/v1/video/generations": {
-      "post": {
-        "summary": "创建视频生成任务",
-        "deprecated": false,
-        "description": "提交视频生成任务，支持文生视频和图生视频。\n\n返回任务 ID，可通过 GET 接口查询任务状态。\n",
-        "operationId": "createVideoGeneration",
-        "tags": [
-          "视频（Videos）"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VideoRequest"
-              },
-              "example": {
-                "model": "kling-v1",
-                "prompt": "宇航员在月球上漫步",
-                "duration": 5,
-                "width": 1280,
-                "height": 720
               }
             }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "成功创建视频生成任务",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/VideoResponse"
-                }
-              }
-            },
-            "headers": {}
-          },
-          "400": {
-            "description": "请求参数错误",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "headers": {}
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
-      }
-    },
-    "/v1/video/generations/{task_id}": {
-      "get": {
-        "summary": "获取视频生成任务状态",
-        "deprecated": false,
-        "description": "查询视频生成任务的状态和结果。\n\n任务状态：\n- `queued`: 排队中\n- `in_progress`: 生成中\n- `completed`: 已完成\n- `failed`: 失败\n",
-        "operationId": "getVideoGeneration",
-        "tags": [
-          "视频（Videos）"
-        ],
-        "parameters": [
-          {
-            "name": "task_id",
-            "in": "path",
-            "description": "任务 ID",
-            "required": true,
-            "example": "abcd1234efgh",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "成功获取任务状态",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/VideoTaskResponse"
-                }
-              }
-            },
-            "headers": {}
-          },
-          "404": {
-            "description": "任务不存在",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/embeddings": {
       "post": {
-        "summary": "原生OpenAI格式",
-        "deprecated": false,
-        "description": "将文本转换为向量嵌入",
+        "tags": ["嵌入（Embeddings）"],
+        "summary": "创建嵌入向量",
+        "description": "为输入文本创建嵌入向量表示",
         "operationId": "createEmbedding",
-        "tags": [
-          "嵌入（Embeddings）"
-        ],
-        "parameters": [],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/EmbeddingRequest"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2074,45 +941,34 @@
                   "$ref": "#/components/schemas/EmbeddingResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/engines/{model}/embeddings": {
       "post": {
-        "summary": "原生Gemini格式",
-        "deprecated": false,
-        "description": "使用指定引擎/模型创建嵌入",
-        "operationId": "createEngineEmbedding",
-        "tags": [
-          "嵌入（Embeddings）"
-        ],
+        "tags": ["嵌入（Embeddings）"],
+        "summary": "创建嵌入向量 (旧版格式)",
+        "description": "兼容旧版 OpenAI API 格式",
+        "operationId": "createEmbeddingLegacy",
         "parameters": [
           {
             "name": "model",
             "in": "path",
-            "description": "模型/引擎 ID",
             "required": true,
-            "example": "",
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/EmbeddingRequest"
-              },
-              "examples": {}
+              }
             }
           }
         },
@@ -2125,128 +981,92 @@
                   "$ref": "#/components/schemas/EmbeddingResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/completions": {
       "post": {
-        "summary": "原生OpenAI格式",
-        "deprecated": false,
+        "tags": ["补全（Completions）"],
+        "summary": "创建文本补全",
         "description": "基于给定提示创建文本补全",
         "operationId": "createCompletion",
-        "tags": [
-          "补全（Completions）"
-        ],
-        "parameters": [],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CompletionRequest"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
-            "description": "成功创建响应",
+            "description": "成功创建补全",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CompletionResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/audio/transcriptions": {
       "post": {
+        "tags": ["音频（Audio）/原生OpenAI格式"],
         "summary": "音频转录",
-        "deprecated": false,
         "description": "将音频转换为文本",
         "operationId": "createTranscription",
-        "tags": [
-          "音频（Audio）/原生OpenAI格式"
-        ],
-        "parameters": [],
         "requestBody": {
+          "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
                 "type": "object",
+                "required": ["file", "model"],
                 "properties": {
                   "file": {
                     "type": "string",
                     "format": "binary",
-                    "description": "音频文件",
-                    "example": ""
+                    "description": "音频文件"
                   },
                   "model": {
                     "type": "string",
+                    "description": "模型名称",
                     "example": "whisper-1"
                   },
                   "language": {
                     "type": "string",
-                    "description": "ISO-639-1 语言代码",
-                    "example": ""
+                    "description": "ISO-639-1 语言代码"
                   },
                   "prompt": {
                     "type": "string",
-                    "example": ""
+                    "description": "可选提示"
                   },
                   "response_format": {
                     "type": "string",
-                    "enum": [
-                      "json",
-                      "text",
-                      "srt",
-                      "verbose_json",
-                      "vtt"
-                    ],
-                    "default": "json",
-                    "example": "json"
+                    "enum": ["json", "text", "srt", "verbose_json", "vtt"],
+                    "default": "json"
                   },
                   "temperature": {
-                    "type": "number",
-                    "example": 0
+                    "type": "number"
                   },
                   "timestamp_granularities": {
                     "type": "array",
                     "items": {
                       "type": "string",
-                      "enum": [
-                        "word",
-                        "segment"
-                      ]
-                    },
-                    "example": ""
+                      "enum": ["word", "segment"]
+                    }
                   }
-                },
-                "required": [
-                  "file",
-                  "model"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2254,66 +1074,48 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AudioTranscriptionResponse"
+                  "$ref": "#/components/schemas/TranscriptionResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/audio/translations": {
       "post": {
+        "tags": ["音频（Audio）/原生OpenAI格式"],
         "summary": "音频翻译",
-        "deprecated": false,
         "description": "将音频翻译为英文文本",
         "operationId": "createTranslation",
-        "tags": [
-          "音频（Audio）/原生OpenAI格式"
-        ],
-        "parameters": [],
         "requestBody": {
+          "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
                 "type": "object",
+                "required": ["file", "model"],
                 "properties": {
                   "file": {
                     "type": "string",
-                    "format": "binary",
-                    "example": ""
+                    "format": "binary"
                   },
                   "model": {
-                    "type": "string",
-                    "example": ""
+                    "type": "string"
                   },
                   "prompt": {
-                    "type": "string",
-                    "example": ""
+                    "type": "string"
                   },
                   "response_format": {
-                    "type": "string",
-                    "example": ""
+                    "type": "string"
                   },
                   "temperature": {
-                    "type": "number",
-                    "example": 0
+                    "type": "number"
                   }
-                },
-                "required": [
-                  "file",
-                  "model"
-                ]
+                }
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2321,76 +1123,75 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AudioTranscriptionResponse"
+                  "$ref": "#/components/schemas/TranscriptionResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/audio/speech": {
       "post": {
+        "tags": ["音频（Audio）/原生OpenAI格式"],
         "summary": "文本转语音",
-        "deprecated": false,
-        "description": "将文本转换为音频",
+        "description": "将文本转换为语音",
         "operationId": "createSpeech",
-        "tags": [
-          "音频（Audio）/原生OpenAI格式"
-        ],
-        "parameters": [],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/SpeechRequest"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
-            "description": "成功生成音频",
+            "description": "成功生成语音",
             "content": {
               "audio/mpeg": {
                 "schema": {
                   "type": "string",
                   "format": "binary"
                 }
+              },
+              "audio/opus": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/aac": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "audio/flac": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/realtime": {
       "get": {
-        "summary": "原生OpenAI格式",
-        "deprecated": false,
-        "description": "建立 WebSocket 连接用于实时对话。\n\n**注意**: 这是一个 WebSocket 端点，需要使用 WebSocket 协议连接。\n\n连接 URL 示例: `wss://api.example.com/v1/realtime?model=gpt-4o-realtime`\n",
+        "tags": ["实时语音（Realtime）"],
+        "summary": "实时语音对话",
+        "description": "建立 WebSocket 连接用于实时对话。\n\n**注意**: 这是一个 WebSocket 端点，需要使用 WebSocket 协议连接。\n\n连接 URL 示例: `wss://api.example.com/v1/realtime?model=gpt-4o-realtime`",
         "operationId": "createRealtimeSession",
-        "tags": [
-          "实时语音（Realtime）"
-        ],
         "parameters": [
           {
             "name": "model",
             "in": "query",
-            "description": "要使用的模型",
             "required": false,
+            "description": "要使用的模型",
             "schema": {
               "type": "string",
               "example": "gpt-4o-realtime-preview"
@@ -2399,8 +1200,7 @@
         ],
         "responses": {
           "101": {
-            "description": "WebSocket 协议切换",
-            "headers": {}
+            "description": "WebSocket 协议切换"
           },
           "400": {
             "description": "请求错误",
@@ -2410,36 +1210,26 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/rerank": {
       "post": {
+        "tags": ["重排序（Rerank）"],
         "summary": "文档重排序",
-        "deprecated": false,
         "description": "根据查询对文档列表进行相关性重排序",
         "operationId": "createRerank",
-        "tags": [
-          "重排序（Rerank）"
-        ],
-        "parameters": [],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/RerankRequest"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2450,36 +1240,26 @@
                   "$ref": "#/components/schemas/RerankResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/moderations": {
       "post": {
-        "summary": "原生OpenAI格式",
-        "deprecated": false,
+        "tags": ["审查（Moderations）"],
+        "summary": "内容审核",
         "description": "检查文本内容是否违反使用政策",
         "operationId": "createModeration",
-        "tags": [
-          "审查（Moderations）"
-        ],
-        "parameters": [],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ModerationRequest"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2490,27 +1270,17 @@
                   "$ref": "#/components/schemas/ModerationResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/fine-tunes": {
       "get": {
+        "tags": ["未实现（Unimplemented）/微调（Fine-tuning）"],
         "summary": "列出微调任务 (未实现)",
-        "deprecated": false,
         "description": "此接口尚未实现",
         "operationId": "listFineTunes",
-        "tags": [
-          "未实现（Unimplemented）/微调（Fine-tuning）"
-        ],
-        "parameters": [],
         "responses": {
           "501": {
             "description": "未实现",
@@ -2520,31 +1290,20 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       },
       "post": {
+        "tags": ["未实现（Unimplemented）/微调（Fine-tuning）"],
         "summary": "创建微调任务 (未实现)",
-        "deprecated": false,
         "description": "此接口尚未实现",
         "operationId": "createFineTune",
-        "tags": [
-          "未实现（Unimplemented）/微调（Fine-tuning）"
-        ],
-        "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {}
+                "type": "object"
               }
             }
           }
@@ -2558,33 +1317,22 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/fine-tunes/{fine_tune_id}": {
       "get": {
+        "tags": ["未实现（Unimplemented）/微调（Fine-tuning）"],
         "summary": "获取微调任务详情 (未实现)",
-        "deprecated": false,
         "description": "此接口尚未实现",
         "operationId": "retrieveFineTune",
-        "tags": [
-          "未实现（Unimplemented）/微调（Fine-tuning）"
-        ],
         "parameters": [
           {
             "name": "fine_tune_id",
             "in": "path",
-            "description": "",
             "required": true,
-            "example": "",
             "schema": {
               "type": "string"
             }
@@ -2599,33 +1347,22 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/fine-tunes/{fine_tune_id}/cancel": {
       "post": {
+        "tags": ["未实现（Unimplemented）/微调（Fine-tuning）"],
         "summary": "取消微调任务 (未实现)",
-        "deprecated": false,
         "description": "此接口尚未实现",
         "operationId": "cancelFineTune",
-        "tags": [
-          "未实现（Unimplemented）/微调（Fine-tuning）"
-        ],
         "parameters": [
           {
             "name": "fine_tune_id",
             "in": "path",
-            "description": "",
             "required": true,
-            "example": "",
             "schema": {
               "type": "string"
             }
@@ -2640,33 +1377,22 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/fine-tunes/{fine_tune_id}/events": {
       "get": {
+        "tags": ["未实现（Unimplemented）/微调（Fine-tuning）"],
         "summary": "获取微调任务事件 (未实现)",
-        "deprecated": false,
         "description": "此接口尚未实现",
         "operationId": "listFineTuneEvents",
-        "tags": [
-          "未实现（Unimplemented）/微调（Fine-tuning）"
-        ],
         "parameters": [
           {
             "name": "fine_tune_id",
             "in": "path",
-            "description": "",
             "required": true,
-            "example": "",
             "schema": {
               "type": "string"
             }
@@ -2681,27 +1407,17 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/files": {
       "get": {
+        "tags": ["未实现（Unimplemented）/文件（Files）"],
         "summary": "列出文件 (未实现)",
-        "deprecated": false,
         "description": "此接口尚未实现",
         "operationId": "listFiles",
-        "tags": [
-          "未实现（Unimplemented）/文件（Files）"
-        ],
-        "parameters": [],
         "responses": {
           "501": {
             "description": "未实现",
@@ -2711,25 +1427,15 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       },
       "post": {
+        "tags": ["未实现（Unimplemented）/文件（Files）"],
         "summary": "上传文件 (未实现)",
-        "deprecated": false,
         "description": "此接口尚未实现",
         "operationId": "createFile",
-        "tags": [
-          "未实现（Unimplemented）/文件（Files）"
-        ],
-        "parameters": [],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -2738,12 +1444,10 @@
                 "properties": {
                   "file": {
                     "type": "string",
-                    "format": "binary",
-                    "example": ""
+                    "format": "binary"
                   },
                   "purpose": {
-                    "type": "string",
-                    "example": ""
+                    "type": "string"
                   }
                 }
               }
@@ -2759,33 +1463,22 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/files/{file_id}": {
       "get": {
+        "tags": ["未实现（Unimplemented）/文件（Files）"],
         "summary": "获取文件信息 (未实现)",
-        "deprecated": false,
         "description": "此接口尚未实现",
         "operationId": "retrieveFile",
-        "tags": [
-          "未实现（Unimplemented）/文件（Files）"
-        ],
         "parameters": [
           {
             "name": "file_id",
             "in": "path",
-            "description": "",
             "required": true,
-            "example": "",
             "schema": {
               "type": "string"
             }
@@ -2800,31 +1493,20 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       },
       "delete": {
+        "tags": ["未实现（Unimplemented）/文件（Files）"],
         "summary": "删除文件 (未实现)",
-        "deprecated": false,
         "description": "此接口尚未实现",
         "operationId": "deleteFile",
-        "tags": [
-          "未实现（Unimplemented）/文件（Files）"
-        ],
         "parameters": [
           {
             "name": "file_id",
             "in": "path",
-            "description": "",
             "required": true,
-            "example": "",
             "schema": {
               "type": "string"
             }
@@ -2839,33 +1521,22 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/v1/files/{file_id}/content": {
       "get": {
+        "tags": ["未实现（Unimplemented）/文件（Files）"],
         "summary": "获取文件内容 (未实现)",
-        "deprecated": false,
         "description": "此接口尚未实现",
         "operationId": "downloadFile",
-        "tags": [
-          "未实现（Unimplemented）/文件（Files）"
-        ],
         "parameters": [
           {
             "name": "file_id",
             "in": "path",
-            "description": "",
             "required": true,
-            "example": "",
             "schema": {
               "type": "string"
             }
@@ -2880,20 +1551,49 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            },
-            "headers": {}
+            }
           }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        }
       }
     }
   },
   "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "使用 Bearer Token 认证。\n格式: `Authorization: Bearer sk-xxxxxx`"
+      }
+    },
     "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "错误信息"
+              },
+              "type": {
+                "type": "string",
+                "description": "错误类型"
+              },
+              "param": {
+                "type": "string",
+                "nullable": true,
+                "description": "相关参数"
+              },
+              "code": {
+                "type": "string",
+                "nullable": true,
+                "description": "错误代码"
+              }
+            }
+          }
+        }
+      },
       "Model": {
         "type": "object",
         "properties": {
@@ -2918,54 +1618,6 @@
           }
         }
       },
-      "Usage": {
-        "type": "object",
-        "properties": {
-          "prompt_tokens": {
-            "type": "integer",
-            "description": "提示词 Token 数"
-          },
-          "completion_tokens": {
-            "type": "integer",
-            "description": "补全 Token 数"
-          },
-          "total_tokens": {
-            "type": "integer",
-            "description": "总 Token 数"
-          },
-          "prompt_tokens_details": {
-            "type": "object",
-            "properties": {
-              "cached_tokens": {
-                "type": "integer"
-              },
-              "text_tokens": {
-                "type": "integer"
-              },
-              "audio_tokens": {
-                "type": "integer"
-              },
-              "image_tokens": {
-                "type": "integer"
-              }
-            }
-          },
-          "completion_tokens_details": {
-            "type": "object",
-            "properties": {
-              "text_tokens": {
-                "type": "integer"
-              },
-              "audio_tokens": {
-                "type": "integer"
-              },
-              "reasoning_tokens": {
-                "type": "integer"
-              }
-            }
-          }
-        }
-      },
       "ModelsResponse": {
         "type": "object",
         "properties": {
@@ -2977,207 +1629,6 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Model"
-            }
-          }
-        }
-      },
-      "ErrorResponse": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "object",
-            "properties": {
-              "message": {
-                "type": "string",
-                "description": "错误信息"
-              },
-              "type": {
-                "type": "string",
-                "description": "错误类型"
-              },
-              "param": {
-                "type": "string",
-                "description": "相关参数",
-                "nullable": true
-              },
-              "code": {
-                "type": "string",
-                "description": "错误代码",
-                "nullable": true
-              }
-            }
-          }
-        }
-      },
-      "Message": {
-        "type": "object",
-        "required": [
-          "role",
-          "content"
-        ],
-        "properties": {
-          "role": {
-            "type": "string",
-            "enum": [
-              "system",
-              "user",
-              "assistant",
-              "tool",
-              "developer"
-            ],
-            "description": "消息角色"
-          },
-          "content": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/MessageContent"
-                }
-              }
-            ],
-            "description": "消息内容"
-          },
-          "name": {
-            "type": "string",
-            "description": "发送者名称"
-          },
-          "tool_calls": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ToolCall"
-            }
-          },
-          "tool_call_id": {
-            "type": "string",
-            "description": "工具调用 ID（用于 tool 角色消息）"
-          },
-          "reasoning_content": {
-            "type": "string",
-            "description": "推理内容"
-          }
-        }
-      },
-      "MessageContent": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "text",
-              "image_url",
-              "input_audio",
-              "file",
-              "video_url"
-            ]
-          },
-          "text": {
-            "type": "string"
-          },
-          "image_url": {
-            "type": "object",
-            "properties": {
-              "url": {
-                "type": "string",
-                "description": "图片 URL 或 base64"
-              },
-              "detail": {
-                "type": "string",
-                "enum": [
-                  "low",
-                  "high",
-                  "auto"
-                ]
-              }
-            }
-          },
-          "input_audio": {
-            "type": "object",
-            "properties": {
-              "data": {
-                "type": "string",
-                "description": "Base64 编码的音频数据"
-              },
-              "format": {
-                "type": "string",
-                "enum": [
-                  "wav",
-                  "mp3"
-                ]
-              }
-            }
-          },
-          "file": {
-            "type": "object",
-            "properties": {
-              "filename": {
-                "type": "string"
-              },
-              "file_data": {
-                "type": "string"
-              },
-              "file_id": {
-                "type": "string"
-              }
-            }
-          },
-          "video_url": {
-            "type": "object",
-            "properties": {
-              "url": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "Tool": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "example": "function"
-          },
-          "function": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              },
-              "parameters": {
-                "type": "object",
-                "description": "JSON Schema 格式的参数定义",
-                "properties": {}
-              }
-            }
-          }
-        }
-      },
-      "ToolCall": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "example": "function"
-          },
-          "function": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "arguments": {
-                "type": "string"
-              }
             }
           }
         }
@@ -3220,680 +1671,266 @@
           }
         }
       },
-      "ChatCompletionResponse": {
+      "Usage": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
+          "prompt_tokens": {
+            "type": "integer",
+            "description": "提示词 Token 数"
           },
-          "object": {
-            "type": "string",
-            "example": "chat.completion"
+          "completion_tokens": {
+            "type": "integer",
+            "description": "补全 Token 数"
           },
-          "created": {
-            "type": "integer"
+          "total_tokens": {
+            "type": "integer",
+            "description": "总 Token 数"
           },
-          "model": {
-            "type": "string"
-          },
-          "choices": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "index": {
-                  "type": "integer"
-                },
-                "message": {
-                  "$ref": "#/components/schemas/Message"
-                },
-                "finish_reason": {
-                  "type": "string",
-                  "enum": [
-                    "stop",
-                    "length",
-                    "tool_calls",
-                    "content_filter"
-                  ]
-                }
-              }
+          "prompt_tokens_details": {
+            "type": "object",
+            "properties": {
+              "cached_tokens": {"type": "integer"},
+              "text_tokens": {"type": "integer"},
+              "audio_tokens": {"type": "integer"},
+              "image_tokens": {"type": "integer"}
             }
           },
-          "usage": {
-            "$ref": "#/components/schemas/Usage"
+          "completion_tokens_details": {
+            "type": "object",
+            "properties": {
+              "text_tokens": {"type": "integer"},
+              "audio_tokens": {"type": "integer"},
+              "reasoning_tokens": {"type": "integer"}
+            }
+          }
+        }
+      },
+      "Message": {
+        "type": "object",
+        "required": ["role", "content"],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": ["system", "user", "assistant", "tool", "developer"],
+            "description": "消息角色"
           },
-          "system_fingerprint": {
-            "type": "string"
+          "content": {
+            "oneOf": [
+              {"type": "string"},
+              {"type": "array", "items": {"$ref": "#/components/schemas/MessageContent"}}
+            ],
+            "description": "消息内容"
+          },
+          "name": {
+            "type": "string",
+            "description": "发送者名称"
+          },
+          "tool_calls": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/ToolCall"}
+          },
+          "tool_call_id": {
+            "type": "string",
+            "description": "工具调用 ID（用于 tool 角色消息）"
+          },
+          "reasoning_content": {
+            "type": "string",
+            "description": "推理内容"
+          }
+        }
+      },
+      "MessageContent": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["text", "image_url", "input_audio", "file", "video_url"]
+          },
+          "text": {"type": "string"},
+          "image_url": {
+            "type": "object",
+            "properties": {
+              "url": {"type": "string", "description": "图片 URL 或 base64"},
+              "detail": {"type": "string", "enum": ["low", "high", "auto"]}
+            }
+          },
+          "input_audio": {
+            "type": "object",
+            "properties": {
+              "data": {"type": "string", "description": "Base64 编码的音频数据"},
+              "format": {"type": "string", "enum": ["wav", "mp3"]}
+            }
+          },
+          "file": {
+            "type": "object",
+            "properties": {
+              "filename": {"type": "string"},
+              "file_data": {"type": "string"},
+              "file_id": {"type": "string"}
+            }
+          },
+          "video_url": {
+            "type": "object",
+            "properties": {
+              "url": {"type": "string"}
+            }
+          }
+        }
+      },
+      "Tool": {
+        "type": "object",
+        "properties": {
+          "type": {"type": "string", "example": "function"},
+          "function": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "description": {"type": "string"},
+              "parameters": {"type": "object", "description": "JSON Schema 格式的参数定义"}
+            }
+          }
+        }
+      },
+      "ToolCall": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "type": {"type": "string", "example": "function"},
+          "function": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "arguments": {"type": "string"}
+            }
           }
         }
       },
       "ChatCompletionRequest": {
         "type": "object",
-        "required": [
-          "model",
-          "messages"
-        ],
+        "required": ["model", "messages"],
         "properties": {
-          "model": {
-            "type": "string",
-            "description": "模型 ID",
-            "example": "gpt-4"
-          },
-          "messages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Message"
-            },
-            "description": "对话消息列表"
-          },
-          "temperature": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 2,
-            "default": 1,
-            "description": "采样温度"
-          },
-          "top_p": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 1,
-            "default": 1,
-            "description": "核采样参数"
-          },
-          "n": {
-            "type": "integer",
-            "minimum": 1,
-            "default": 1,
-            "description": "生成数量"
-          },
-          "stream": {
-            "type": "boolean",
-            "default": false,
-            "description": "是否流式响应"
-          },
-          "stream_options": {
-            "type": "object",
-            "properties": {
-              "include_usage": {
-                "type": "boolean"
-              }
-            }
-          },
-          "stop": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "description": "停止序列"
-          },
-          "max_tokens": {
-            "type": "integer",
-            "description": "最大生成 Token 数"
-          },
-          "max_completion_tokens": {
-            "type": "integer",
-            "description": "最大补全 Token 数"
-          },
-          "presence_penalty": {
-            "type": "number",
-            "minimum": -2,
-            "maximum": 2,
-            "default": 0
-          },
-          "frequency_penalty": {
-            "type": "number",
-            "minimum": -2,
-            "maximum": 2,
-            "default": 0
-          },
-          "logit_bias": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "number"
-            },
-            "properties": {}
-          },
-          "user": {
-            "type": "string"
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Tool"
-            }
-          },
-          "tool_choice": {
-            "oneOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "none",
-                  "auto",
-                  "required"
-                ]
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string"
-                  },
-                  "function": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            ]
-          },
-          "response_format": {
-            "$ref": "#/components/schemas/ResponseFormat"
-          },
-          "seed": {
-            "type": "integer"
-          },
-          "reasoning_effort": {
-            "type": "string",
-            "enum": [
-              "low",
-              "medium",
-              "high"
-            ],
-            "description": "推理强度 (用于支持推理的模型)"
-          },
-          "modalities": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "text",
-                "audio"
-              ]
-            }
-          },
-          "audio": {
-            "type": "object",
-            "properties": {
-              "voice": {
-                "type": "string"
-              },
-              "format": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "CompletionRequest": {
-        "type": "object",
-        "required": [
-          "model",
-          "prompt"
-        ],
-        "properties": {
-          "model": {
-            "type": "string"
-          },
-          "prompt": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "max_tokens": {
-            "type": "integer"
-          },
-          "temperature": {
-            "type": "number"
-          },
-          "top_p": {
-            "type": "number"
-          },
-          "n": {
-            "type": "integer"
-          },
-          "stream": {
-            "type": "boolean"
-          },
-          "stop": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "suffix": {
-            "type": "string"
-          },
-          "echo": {
-            "type": "boolean"
-          }
-        }
-      },
-      "CompletionResponse": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "object": {
-            "type": "string",
-            "example": "text_completion"
-          },
-          "created": {
-            "type": "integer"
-          },
-          "model": {
-            "type": "string"
-          },
-          "choices": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "text": {
-                  "type": "string"
-                },
-                "index": {
-                  "type": "integer"
-                },
-                "finish_reason": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "usage": {
-            "$ref": "#/components/schemas/Usage"
-          }
+          "model": {"type": "string", "description": "模型名称", "example": "gpt-4"},
+          "messages": {"type": "array", "items": {"$ref": "#/components/schemas/Message"}, "description": "消息列表"},
+          "temperature": {"type": "number", "minimum": 0, "maximum": 2, "description": "采样温度"},
+          "top_p": {"type": "number", "description": "核采样参数"},
+          "n": {"type": "integer", "description": "生成的补全数量"},
+          "stream": {"type": "boolean", "description": "是否使用流式响应"},
+          "stream_options": {"type": "object", "properties": {"include_usage": {"type": "boolean"}}},
+          "stop": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "string"}}], "description": "停止序列"},
+          "max_tokens": {"type": "integer", "description": "最大 token 数"},
+          "max_completion_tokens": {"type": "integer", "description": "最大补全 token 数"},
+          "presence_penalty": {"type": "number", "description": "存在惩罚"},
+          "frequency_penalty": {"type": "number", "description": "频率惩罚"},
+          "logit_bias": {"type": "object", "additionalProperties": {"type": "number"}},
+          "user": {"type": "string", "description": "用户标识"},
+          "tools": {"type": "array", "items": {"$ref": "#/components/schemas/Tool"}},
+          "tool_choice": {"oneOf": [{"type": "string"}, {"type": "object"}]},
+          "response_format": {"$ref": "#/components/schemas/ResponseFormat"},
+          "seed": {"type": "integer"},
+          "reasoning_effort": {"type": "string", "enum": ["low", "medium", "high"]},
+          "modalities": {"type": "array", "items": {"type": "string"}},
+          "audio": {"type": "object", "properties": {"voice": {"type": "string"}, "format": {"type": "string"}}}
         }
       },
       "ResponseFormat": {
         "type": "object",
         "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "text",
-              "json_object",
-              "json_schema"
-            ]
+          "type": {"type": "string", "enum": ["text", "json_object", "json_schema"]},
+          "json_schema": {"type": "object", "description": "JSON Schema 定义"}
+        }
+      },
+      "ChatCompletionResponse": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "object": {"type": "string", "example": "chat.completion"},
+          "created": {"type": "integer"},
+          "model": {"type": "string"},
+          "choices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "index": {"type": "integer"},
+                "message": {"$ref": "#/components/schemas/Message"},
+                "finish_reason": {"type": "string", "enum": ["stop", "length", "tool_calls", "content_filter"]}
+              }
+            }
           },
-          "json_schema": {
-            "type": "object",
-            "description": "JSON Schema 定义",
-            "properties": {}
-          }
+          "usage": {"$ref": "#/components/schemas/Usage"},
+          "system_fingerprint": {"type": "string"}
         }
       },
       "ResponsesRequest": {
         "type": "object",
-        "required": [
-          "model"
-        ],
+        "required": ["model"],
         "properties": {
-          "model": {
-            "type": "string"
-          },
-          "input": {
-            "description": "输入内容，可以是字符串或消息数组",
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            ]
-          },
-          "instructions": {
-            "type": "string"
-          },
-          "max_output_tokens": {
-            "type": "integer"
-          },
-          "temperature": {
-            "type": "number"
-          },
-          "top_p": {
-            "type": "number"
-          },
-          "stream": {
-            "type": "boolean"
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {}
-            }
-          },
-          "tool_choice": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object",
-                "properties": {}
-              }
-            ]
-          },
-          "reasoning": {
-            "type": "object",
-            "properties": {
-              "effort": {
-                "type": "string",
-                "enum": [
-                  "low",
-                  "medium",
-                  "high"
-                ]
-              },
-              "summary": {
-                "type": "string"
-              }
-            }
-          },
-          "previous_response_id": {
-            "type": "string"
-          },
-          "truncation": {
-            "type": "string",
-            "enum": [
-              "auto",
-              "disabled"
-            ]
-          }
+          "model": {"type": "string"},
+          "input": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "object"}}], "description": "输入内容，可以是字符串或消息数组"},
+          "instructions": {"type": "string"},
+          "max_output_tokens": {"type": "integer"},
+          "temperature": {"type": "number"},
+          "top_p": {"type": "number"},
+          "stream": {"type": "boolean"},
+          "tools": {"type": "array", "items": {"type": "object"}},
+          "tool_choice": {"oneOf": [{"type": "string"}, {"type": "object"}]},
+          "reasoning": {"type": "object", "properties": {"effort": {"type": "string", "enum": ["low", "medium", "high"]}, "summary": {"type": "string"}}},
+          "previous_response_id": {"type": "string"},
+          "truncation": {"type": "string", "enum": ["auto", "disabled"]}
         }
       },
       "ResponsesResponse": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
-          "object": {
-            "type": "string",
-            "example": "response"
-          },
-          "created_at": {
-            "type": "integer"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "completed",
-              "failed",
-              "in_progress",
-              "incomplete"
-            ]
-          },
-          "model": {
-            "type": "string"
-          },
+          "id": {"type": "string"},
+          "object": {"type": "string", "example": "response"},
+          "created_at": {"type": "integer"},
+          "status": {"type": "string", "enum": ["completed", "failed", "in_progress", "incomplete"]},
+          "model": {"type": "string"},
           "output": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "type": {
-                  "type": "string"
-                },
-                "id": {
-                  "type": "string"
-                },
-                "status": {
-                  "type": "string"
-                },
-                "role": {
-                  "type": "string"
-                },
-                "content": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "type": {
-                        "type": "string"
-                      },
-                      "text": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
+                "type": {"type": "string"},
+                "id": {"type": "string"},
+                "status": {"type": "string"},
+                "role": {"type": "string"},
+                "content": {"type": "array", "items": {"type": "object", "properties": {"type": {"type": "string"}, "text": {"type": "string"}}}}
               }
             }
           },
-          "usage": {
-            "$ref": "#/components/schemas/Usage"
-          }
+          "usage": {"$ref": "#/components/schemas/Usage"}
         }
       },
       "ClaudeRequest": {
         "type": "object",
-        "required": [
-          "model",
-          "messages",
-          "max_tokens"
-        ],
+        "required": ["model", "messages", "max_tokens"],
         "properties": {
-          "model": {
-            "type": "string",
-            "example": "claude-3-opus-20240229"
-          },
-          "messages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ClaudeMessage"
-            }
-          },
-          "system": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            ]
-          },
-          "max_tokens": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "temperature": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 1
-          },
-          "top_p": {
-            "type": "number"
-          },
-          "top_k": {
-            "type": "integer"
-          },
-          "stream": {
-            "type": "boolean"
-          },
-          "stop_sequences": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "input_schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
-          },
-          "tool_choice": {
-            "oneOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "enum": [
-                      "auto",
-                      "any",
-                      "tool"
-                    ]
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                }
-              }
-            ]
-          },
-          "thinking": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "enabled",
-                  "disabled"
-                ]
-              },
-              "budget_tokens": {
-                "type": "integer"
-              }
-            }
-          },
-          "metadata": {
-            "type": "object",
-            "properties": {
-              "user_id": {
-                "type": "string"
-              }
-            }
-          }
+          "model": {"type": "string", "example": "claude-3-opus-20240229"},
+          "messages": {"type": "array", "items": {"$ref": "#/components/schemas/ClaudeMessage"}},
+          "system": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "object"}}]},
+          "max_tokens": {"type": "integer", "minimum": 1},
+          "temperature": {"type": "number", "minimum": 0, "maximum": 1},
+          "top_p": {"type": "number"},
+          "top_k": {"type": "integer"},
+          "stream": {"type": "boolean"},
+          "stop_sequences": {"type": "array", "items": {"type": "string"}},
+          "tools": {"type": "array", "items": {"type": "object", "properties": {"name": {"type": "string"}, "description": {"type": "string"}, "input_schema": {"type": "object"}}}},
+          "tool_choice": {"type": "object", "properties": {"type": {"type": "string", "enum": ["auto", "any", "tool"]}, "name": {"type": "string"}}},
+          "thinking": {"type": "object", "properties": {"type": {"type": "string", "enum": ["enabled", "disabled"]}, "budget_tokens": {"type": "integer"}}},
+          "metadata": {"type": "object", "properties": {"user_id": {"type": "string"}}}
         }
       },
       "ClaudeMessage": {
         "type": "object",
-        "required": [
-          "role",
-          "content"
-        ],
+        "required": ["role", "content"],
         "properties": {
-          "role": {
-            "type": "string",
-            "enum": [
-              "user",
-              "assistant"
-            ]
-          },
+          "role": {"type": "string", "enum": ["user", "assistant"]},
           "content": {
             "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "text",
-                        "image",
-                        "tool_use",
-                        "tool_result"
-                      ]
-                    },
-                    "text": {
-                      "type": "string"
-                    },
-                    "source": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "base64",
-                            "url"
-                          ]
-                        },
-                        "media_type": {
-                          "type": "string"
-                        },
-                        "data": {
-                          "type": "string"
-                        },
-                        "url": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "input": {
-                      "type": "object",
-                      "properties": {}
-                    },
-                    "tool_use_id": {
-                      "type": "string"
-                    },
-                    "content": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
+              {"type": "string"},
+              {"type": "array", "items": {"type": "object", "properties": {"type": {"type": "string", "enum": ["text", "image", "tool_use", "tool_result"]}, "text": {"type": "string"}, "source": {"type": "object", "properties": {"type": {"type": "string", "enum": ["base64", "url"]}, "media_type": {"type": "string"}, "data": {"type": "string"}, "url": {"type": "string"}}}, "id": {"type": "string"}, "name": {"type": "string"}, "input": {"type": "object"}, "tool_use_id": {"type": "string"}, "content": {"type": "string"}}}}
             ]
           }
         }
@@ -3901,700 +1938,234 @@
       "ClaudeResponse": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "example": "message"
-          },
-          "role": {
-            "type": "string",
-            "example": "assistant"
-          },
-          "content": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string"
-                },
-                "text": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "model": {
-            "type": "string"
-          },
-          "stop_reason": {
-            "type": "string",
-            "enum": [
-              "end_turn",
-              "max_tokens",
-              "stop_sequence",
-              "tool_use"
-            ]
-          },
-          "usage": {
-            "type": "object",
-            "properties": {
-              "input_tokens": {
-                "type": "integer"
-              },
-              "output_tokens": {
-                "type": "integer"
-              },
-              "cache_creation_input_tokens": {
-                "type": "integer"
-              },
-              "cache_read_input_tokens": {
-                "type": "integer"
-              }
-            }
-          }
-        }
-      },
-      "EmbeddingRequest": {
-        "type": "object",
-        "required": [
-          "model",
-          "input"
-        ],
-        "properties": {
-          "model": {
-            "type": "string",
-            "example": "text-embedding-ada-002"
-          },
-          "input": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "description": "要嵌入的文本"
-          },
-          "encoding_format": {
-            "type": "string",
-            "enum": [
-              "float",
-              "base64"
-            ],
-            "default": "float"
-          },
-          "dimensions": {
-            "type": "integer",
-            "description": "输出向量维度"
-          }
-        }
-      },
-      "EmbeddingResponse": {
-        "type": "object",
-        "properties": {
-          "object": {
-            "type": "string",
-            "example": "list"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "example": "embedding"
-                },
-                "index": {
-                  "type": "integer"
-                },
-                "embedding": {
-                  "type": "array",
-                  "items": {
-                    "type": "number"
-                  }
-                }
-              }
-            }
-          },
-          "model": {
-            "type": "string"
-          },
-          "usage": {
-            "type": "object",
-            "properties": {
-              "prompt_tokens": {
-                "type": "integer"
-              },
-              "total_tokens": {
-                "type": "integer"
-              }
-            }
-          }
-        }
-      },
-      "ImageResponse": {
-        "type": "object",
-        "properties": {
-          "created": {
-            "type": "integer"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "url": {
-                  "type": "string"
-                },
-                "b64_json": {
-                  "type": "string"
-                },
-                "revised_prompt": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "AudioTranscriptionResponse": {
-        "type": "object",
-        "properties": {
-          "text": {
-            "type": "string"
-          }
-        }
-      },
-      "SpeechRequest": {
-        "type": "object",
-        "required": [
-          "model",
-          "input",
-          "voice"
-        ],
-        "properties": {
-          "model": {
-            "type": "string",
-            "example": "tts-1"
-          },
-          "input": {
-            "type": "string",
-            "description": "要转换的文本",
-            "maxLength": 4096
-          },
-          "voice": {
-            "type": "string",
-            "enum": [
-              "alloy",
-              "echo",
-              "fable",
-              "onyx",
-              "nova",
-              "shimmer"
-            ]
-          },
-          "response_format": {
-            "type": "string",
-            "enum": [
-              "mp3",
-              "opus",
-              "aac",
-              "flac",
-              "wav",
-              "pcm"
-            ],
-            "default": "mp3"
-          },
-          "speed": {
-            "type": "number",
-            "minimum": 0.25,
-            "maximum": 4,
-            "default": 1
-          }
-        }
-      },
-      "RerankRequest": {
-        "type": "object",
-        "required": [
-          "model",
-          "query",
-          "documents"
-        ],
-        "properties": {
-          "model": {
-            "type": "string",
-            "example": "rerank-english-v2.0"
-          },
-          "query": {
-            "type": "string",
-            "description": "查询文本"
-          },
-          "documents": {
-            "type": "array",
-            "items": {
-              "oneOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "object",
-                  "properties": {}
-                }
-              ]
-            },
-            "description": "要重排序的文档列表"
-          },
-          "top_n": {
-            "type": "integer",
-            "description": "返回前 N 个结果"
-          },
-          "return_documents": {
-            "type": "boolean",
-            "default": false
-          }
-        }
-      },
-      "RerankResponse": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "index": {
-                  "type": "integer"
-                },
-                "relevance_score": {
-                  "type": "number"
-                },
-                "document": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
-          },
-          "meta": {
-            "type": "object",
-            "properties": {}
-          }
-        }
-      },
-      "VideoRequest": {
-        "type": "object",
-        "description": "视频生成请求",
-        "properties": {
-          "model": {
-            "type": "string",
-            "description": "模型/风格 ID",
-            "example": "kling-v1"
-          },
-          "prompt": {
-            "type": "string",
-            "description": "文本描述提示词",
-            "example": "宇航员站起身走了"
-          },
-          "image": {
-            "type": "string",
-            "description": "图片输入 (URL 或 Base64)",
-            "example": "https://example.com/image.jpg"
-          },
-          "duration": {
-            "type": "number",
-            "description": "视频时长（秒）",
-            "example": 5
-          },
-          "width": {
-            "type": "integer",
-            "description": "视频宽度",
-            "example": 1280
-          },
-          "height": {
-            "type": "integer",
-            "description": "视频高度",
-            "example": 720
-          },
-          "fps": {
-            "type": "integer",
-            "description": "视频帧率",
-            "example": 30
-          },
-          "seed": {
-            "type": "integer",
-            "description": "随机种子",
-            "example": 20231234
-          },
-          "n": {
-            "type": "integer",
-            "description": "生成视频数量",
-            "example": 1
-          },
-          "response_format": {
-            "type": "string",
-            "description": "响应格式",
-            "example": "url"
-          },
-          "user": {
-            "type": "string",
-            "description": "用户标识",
-            "example": "user-1234"
-          },
-          "metadata": {
-            "type": "object",
-            "description": "扩展参数 (如 negative_prompt, style, quality_level 等)",
-            "additionalProperties": true,
-            "properties": {}
-          }
-        }
-      },
-      "ModerationRequest": {
-        "type": "object",
-        "required": [
-          "input"
-        ],
-        "properties": {
-          "input": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "model": {
-            "type": "string",
-            "example": "text-moderation-latest"
-          }
-        }
-      },
-      "VideoResponse": {
-        "type": "object",
-        "description": "视频生成任务提交响应",
-        "properties": {
-          "task_id": {
-            "type": "string",
-            "description": "任务 ID",
-            "example": "abcd1234efgh"
-          },
-          "status": {
-            "type": "string",
-            "description": "任务状态",
-            "example": "queued"
-          }
-        }
-      },
-      "ModerationResponse": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "model": {
-            "type": "string"
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "flagged": {
-                  "type": "boolean"
-                },
-                "categories": {
-                  "type": "object",
-                  "properties": {}
-                },
-                "category_scores": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
-          }
-        }
-      },
-      "VideoTaskResponse": {
-        "type": "object",
-        "description": "视频任务状态查询响应",
-        "properties": {
-          "task_id": {
-            "type": "string",
-            "description": "任务 ID",
-            "example": "abcd1234efgh"
-          },
-          "status": {
-            "type": "string",
-            "description": "任务状态",
-            "enum": [
-              "queued",
-              "in_progress",
-              "completed",
-              "failed"
-            ],
-            "example": "completed"
-          },
-          "url": {
-            "type": "string",
-            "description": "视频资源 URL（成功时）",
-            "example": "https://example.com/video.mp4"
-          },
-          "format": {
-            "type": "string",
-            "description": "视频格式",
-            "example": "mp4"
-          },
-          "metadata": {
-            "$ref": "#/components/schemas/VideoTaskMetadata"
-          },
-          "error": {
-            "$ref": "#/components/schemas/VideoTaskError"
-          }
+          "id": {"type": "string"},
+          "type": {"type": "string", "example": "message"},
+          "role": {"type": "string", "example": "assistant"},
+          "content": {"type": "array", "items": {"type": "object", "properties": {"type": {"type": "string"}, "text": {"type": "string"}}}},
+          "model": {"type": "string"},
+          "stop_reason": {"type": "string", "enum": ["end_turn", "max_tokens", "stop_sequence", "tool_use"]},
+          "usage": {"type": "object", "properties": {"input_tokens": {"type": "integer"}, "output_tokens": {"type": "integer"}, "cache_creation_input_tokens": {"type": "integer"}, "cache_read_input_tokens": {"type": "integer"}}}
         }
       },
       "GeminiRequest": {
         "type": "object",
+        "required": ["contents"],
         "properties": {
           "contents": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "role": {
-                  "type": "string",
-                  "enum": [
-                    "user",
-                    "model"
-                  ]
-                },
-                "parts": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "text": {
-                        "type": "string"
-                      },
-                      "inlineData": {
-                        "type": "object",
-                        "properties": {
-                          "mimeType": {
-                            "type": "string"
-                          },
-                          "data": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
+                "role": {"type": "string", "enum": ["user", "model"]},
+                "parts": {"type": "array", "items": {"type": "object", "properties": {"text": {"type": "string"}, "inlineData": {"type": "object", "properties": {"mimeType": {"type": "string"}, "data": {"type": "string"}}}}}}
               }
             }
           },
-          "generationConfig": {
-            "type": "object",
-            "properties": {
-              "temperature": {
-                "type": "number"
-              },
-              "topP": {
-                "type": "number"
-              },
-              "topK": {
-                "type": "integer"
-              },
-              "maxOutputTokens": {
-                "type": "integer"
-              },
-              "stopSequences": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "safetySettings": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "category": {
-                  "type": "string"
-                },
-                "threshold": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {}
-            }
-          },
-          "systemInstruction": {
-            "type": "object",
-            "properties": {
-              "parts": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
-          }
+          "generationConfig": {"type": "object", "properties": {"temperature": {"type": "number"}, "topP": {"type": "number"}, "topK": {"type": "integer"}, "maxOutputTokens": {"type": "integer"}, "stopSequences": {"type": "array", "items": {"type": "string"}}}},
+          "safetySettings": {"type": "array", "items": {"type": "object", "properties": {"category": {"type": "string"}, "threshold": {"type": "string"}}}},
+          "tools": {"type": "array", "items": {"type": "object"}},
+          "systemInstruction": {"type": "object", "properties": {"parts": {"type": "array", "items": {"type": "object"}}}}
+        }
+      },
+      "GeminiResponse": {
+        "type": "object",
+        "properties": {
+          "candidates": {"type": "array", "items": {"type": "object", "properties": {"content": {"type": "object", "properties": {"role": {"type": "string"}, "parts": {"type": "array", "items": {"type": "object"}}}}, "finishReason": {"type": "string"}, "safetyRatings": {"type": "array", "items": {"type": "object"}}}}},
+          "usageMetadata": {"type": "object", "properties": {"promptTokenCount": {"type": "integer"}, "candidatesTokenCount": {"type": "integer"}, "totalTokenCount": {"type": "integer"}}}
+        }
+      },
+      "ImageGenerationRequest": {
+        "type": "object",
+        "required": ["prompt"],
+        "properties": {
+          "model": {"type": "string", "description": "用于图像生成的模型。`dall-e-2`、`dall-e-3` 或 `gpt-image-1` 之一。"},
+          "prompt": {"type": "string", "description": "所需图像的文本描述"},
+          "n": {"type": "integer", "description": "要生成的图像数量", "minimum": 1, "maximum": 10},
+          "size": {"type": "string", "description": "生成的图像大小", "enum": ["256x256", "512x512", "1024x1024", "1536x1024", "1024x1536", "1792x1024", "1024x1792"]},
+          "background": {"type": "string", "description": "背景透明度设置（仅 gpt-image-1）", "enum": ["transparent", "opaque", "auto"]},
+          "moderation": {"type": "string", "description": "内容审核级别", "enum": ["low", "auto"]},
+          "quality": {"type": "string", "description": "图像质量"},
+          "style": {"type": "string", "description": "图像风格"},
+          "user": {"type": "string", "description": "用户标识"}
+        }
+      },
+      "ImageGenerationResponse": {
+        "type": "object",
+        "properties": {
+          "created": {"type": "integer"},
+          "data": {"type": "array", "items": {"type": "object", "properties": {"b64_json": {"type": "string"}, "url": {"type": "string"}}}},
+          "usage": {"type": "object", "properties": {"total_tokens": {"type": "integer"}, "input_tokens": {"type": "integer"}, "output_tokens": {"type": "integer"}, "input_tokens_details": {"type": "object", "properties": {"text_tokens": {"type": "integer"}, "image_tokens": {"type": "integer"}}}}}
+        }
+      },
+      "ImageEditRequest": {
+        "type": "object",
+        "required": ["image", "prompt"],
+        "properties": {
+          "image": {"type": "string", "format": "binary", "description": "要编辑的原始图像"},
+          "mask": {"type": "string", "format": "binary", "description": "遮罩图像"},
+          "prompt": {"type": "string", "description": "编辑描述"},
+          "model": {"type": "string"},
+          "n": {"type": "integer"},
+          "size": {"type": "string"}
+        }
+      },
+      "VideoGenerationRequest": {
+        "type": "object",
+        "required": ["model", "prompt"],
+        "properties": {
+          "model": {"type": "string", "description": "模型名称"},
+          "prompt": {"type": "string", "description": "视频描述"},
+          "duration": {"type": "number", "description": "视频时长（秒）"},
+          "width": {"type": "integer", "description": "视频宽度"},
+          "height": {"type": "integer", "description": "视频高度"},
+          "fps": {"type": "integer", "description": "帧率"},
+          "image": {"type": "string", "description": "参考图像（用于图生视频）"},
+          "seed": {"type": "integer", "description": "随机种子"}
+        }
+      },
+      "VideoGenerationTaskResponse": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string", "description": "任务 ID"},
+          "status": {"type": "string", "enum": ["queued", "in_progress", "completed", "failed"], "description": "任务状态"},
+          "created_at": {"type": "integer", "description": "创建时间"}
+        }
+      },
+      "VideoGenerationStatusResponse": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string", "description": "任务 ID"},
+          "status": {"type": "string", "enum": ["queued", "in_progress", "completed", "failed"], "description": "任务状态"},
+          "progress": {"type": "number", "description": "进度百分比"},
+          "video_url": {"type": "string", "description": "视频 URL（完成后）"},
+          "metadata": {"$ref": "#/components/schemas/VideoTaskMetadata"},
+          "error": {"$ref": "#/components/schemas/VideoTaskError"}
         }
       },
       "VideoTaskMetadata": {
         "type": "object",
         "description": "视频任务元数据",
         "properties": {
-          "duration": {
-            "type": "number",
-            "description": "实际生成的视频时长",
-            "example": 5
-          },
-          "fps": {
-            "type": "integer",
-            "description": "实际帧率",
-            "example": 30
-          },
-          "width": {
-            "type": "integer",
-            "description": "实际宽度",
-            "example": 1280
-          },
-          "height": {
-            "type": "integer",
-            "description": "实际高度",
-            "example": 720
-          },
-          "seed": {
-            "type": "integer",
-            "description": "使用的随机种子",
-            "example": 20231234
-          }
+          "duration": {"type": "number", "description": "实际生成的视频时长", "example": 5},
+          "fps": {"type": "integer", "description": "实际帧率", "example": 30},
+          "width": {"type": "integer", "description": "实际宽度", "example": 1280},
+          "height": {"type": "integer", "description": "实际高度", "example": 720},
+          "seed": {"type": "integer", "description": "使用的随机种子", "example": 20231234}
         }
       },
       "VideoTaskError": {
         "type": "object",
         "description": "视频任务错误信息",
         "properties": {
-          "code": {
-            "type": "integer",
-            "description": "错误码"
-          },
-          "message": {
-            "type": "string",
-            "description": "错误信息"
-          }
+          "code": {"type": "integer", "description": "错误码"},
+          "message": {"type": "string", "description": "错误信息"}
         }
       },
-      "GeminiResponse": {
+      "EmbeddingRequest": {
+        "type": "object",
+        "required": ["model", "input"],
+        "properties": {
+          "model": {"type": "string", "description": "模型名称"},
+          "input": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "string"}}], "description": "要嵌入的文本"},
+          "encoding_format": {"type": "string", "enum": ["float", "base64"]},
+          "dimensions": {"type": "integer", "description": "输出维度"},
+          "user": {"type": "string"}
+        }
+      },
+      "EmbeddingResponse": {
         "type": "object",
         "properties": {
-          "candidates": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "content": {
-                  "type": "object",
-                  "properties": {
-                    "role": {
-                      "type": "string"
-                    },
-                    "parts": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {}
-                      }
-                    }
-                  }
-                },
-                "finishReason": {
-                  "type": "string"
-                },
-                "safetyRatings": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {}
-                  }
-                }
-              }
-            }
-          },
-          "usageMetadata": {
-            "type": "object",
-            "properties": {
-              "promptTokenCount": {
-                "type": "integer"
-              },
-              "candidatesTokenCount": {
-                "type": "integer"
-              },
-              "totalTokenCount": {
-                "type": "integer"
-              }
-            }
-          }
+          "object": {"type": "string", "example": "list"},
+          "data": {"type": "array", "items": {"type": "object", "properties": {"object": {"type": "string", "example": "embedding"}, "index": {"type": "integer"}, "embedding": {"type": "array", "items": {"type": "number"}}}}},
+          "model": {"type": "string"},
+          "usage": {"type": "object", "properties": {"prompt_tokens": {"type": "integer"}, "total_tokens": {"type": "integer"}}}
         }
       },
-      "OpenAIVideoError": {
+      "CompletionRequest": {
         "type": "object",
-        "description": "OpenAI 视频错误信息",
+        "required": ["model", "prompt"],
         "properties": {
-          "message": {
-            "type": "string",
-            "description": "错误信息"
-          },
-          "code": {
-            "type": "string",
-            "description": "错误码"
-          }
+          "model": {"type": "string"},
+          "prompt": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "string"}}]},
+          "max_tokens": {"type": "integer"},
+          "temperature": {"type": "number"},
+          "top_p": {"type": "number"},
+          "n": {"type": "integer"},
+          "stream": {"type": "boolean"},
+          "stop": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "string"}}]},
+          "suffix": {"type": "string"},
+          "echo": {"type": "boolean"}
+        }
+      },
+      "CompletionResponse": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "object": {"type": "string", "example": "text_completion"},
+          "created": {"type": "integer"},
+          "model": {"type": "string"},
+          "choices": {"type": "array", "items": {"type": "object", "properties": {"text": {"type": "string"}, "index": {"type": "integer"}, "finish_reason": {"type": "string"}}}},
+          "usage": {"$ref": "#/components/schemas/Usage"}
+        }
+      },
+      "TranscriptionResponse": {
+        "type": "object",
+        "properties": {
+          "text": {"type": "string", "description": "转录的文本"},
+          "task": {"type": "string"},
+          "language": {"type": "string"},
+          "duration": {"type": "number"},
+          "words": {"type": "array", "items": {"type": "object", "properties": {"word": {"type": "string"}, "start": {"type": "number"}, "end": {"type": "number"}}}},
+          "segments": {"type": "array", "items": {"type": "object"}}
+        }
+      },
+      "SpeechRequest": {
+        "type": "object",
+        "required": ["model", "input", "voice"],
+        "properties": {
+          "model": {"type": "string", "description": "TTS 模型", "example": "tts-1"},
+          "input": {"type": "string", "description": "要转换的文本"},
+          "voice": {"type": "string", "description": "语音类型", "enum": ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]},
+          "response_format": {"type": "string", "description": "输出格式", "enum": ["mp3", "opus", "aac", "flac"], "default": "mp3"},
+          "speed": {"type": "number", "description": "语速", "minimum": 0.25, "maximum": 4.0, "default": 1.0}
+        }
+      },
+      "RerankRequest": {
+        "type": "object",
+        "required": ["model", "query", "documents"],
+        "properties": {
+          "model": {"type": "string", "description": "重排序模型"},
+          "query": {"type": "string", "description": "查询文本"},
+          "documents": {"type": "array", "items": {"type": "string"}, "description": "待排序的文档列表"},
+          "top_n": {"type": "integer", "description": "返回前 N 个结果"},
+          "return_documents": {"type": "boolean", "description": "是否返回文档内容"}
+        }
+      },
+      "RerankResponse": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "results": {"type": "array", "items": {"type": "object", "properties": {"index": {"type": "integer"}, "relevance_score": {"type": "number"}, "document": {"type": "object"}}}},
+          "usage": {"type": "object", "properties": {"total_tokens": {"type": "integer"}}}
+        }
+      },
+      "ModerationRequest": {
+        "type": "object",
+        "required": ["input"],
+        "properties": {
+          "model": {"type": "string", "description": "审核模型"},
+          "input": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "string"}}], "description": "要审核的文本"}
+        }
+      },
+      "ModerationResponse": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "model": {"type": "string"},
+          "results": {"type": "array", "items": {"type": "object", "properties": {"flagged": {"type": "boolean"}, "categories": {"type": "object", "additionalProperties": {"type": "boolean"}}, "category_scores": {"type": "object", "additionalProperties": {"type": "number"}}}}}
         }
       }
-    },
-    "responses": {},
-    "securitySchemes": {
-      "BearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "description": "使用 Bearer Token 认证。\n格式: `Authorization: Bearer sk-xxxxxx`\n"
-      },
-      "Bearer": {
-        "type": "http",
-        "scheme": "bearer"
-      }
     }
-  },
-  "servers": [],
-  "security": [
-    {
-      "BearerAuth": []
-    }
-  ]
+  }
 }
+

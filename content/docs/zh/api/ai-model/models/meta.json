@@ -1,5 +1,6 @@
 {
   "title": "模型",
   "icon": "Layers",
-  "pages": ["list"]
+  "pages": ["list-models", "list-models-gemini"]
 }
+

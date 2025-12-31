@@ -1,5 +1,5 @@
 {
-  "title": "AI模型接口",
+  "title": "AI 模型接口",
   "icon": "Bot",
   "pages": [
     "models",
@@ -15,3 +15,4 @@
     "unimplemented"
   ]
 }
+

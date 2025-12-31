@@ -1,5 +1,6 @@
 {
   "title": "嵌入",
-  "icon": "Database",
-  "pages": ["create-embedding", "create-engine-embedding"]
+  "icon": "Boxes",
+  "pages": ["create-embedding", "create-embedding-legacy"]
 }
+

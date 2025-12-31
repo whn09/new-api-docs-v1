@@ -1,11 +1,6 @@
 {
   "title": "视频",
   "icon": "Video",
-  "pages": [
-    "sora",
-    "kling",
-    "jimeng",
-    "create-video-generation",
-    "get-video-generation"
-  ]
+  "pages": ["sora", "kling", "jimeng"]
 }
+

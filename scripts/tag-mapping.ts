@@ -23,6 +23,7 @@ export const aiModelTagMapping: Record<string, string> = {
   原生OpenAI格式: 'openai',
   通义千问OpenAI格式: 'qwen',
   原生Gemini格式: 'gemini',
+  原生Claude格式: 'claude',
   Sora格式: 'sora',
   可灵格式: 'kling',
   即梦格式: 'jimeng',
@@ -32,6 +33,8 @@ export const aiModelTagMapping: Record<string, string> = {
   // Full path tags (for direct matching)
   '模型（Models）/列出模型': 'models/list',
   '聊天（Chat）/原生OpenAI格式': 'chat/openai',
+  '聊天（Chat）/原生Gemini格式': 'chat/gemini',
+  '聊天（Chat）/原生Claude格式': 'chat/claude',
   '图像（Images）/原生OpenAI格式': 'images/openai',
   '图像（Images）/通义千问OpenAI格式': 'images/qwen',
   '图像（Images）/原生Gemini格式': 'images/gemini',
@@ -114,6 +117,11 @@ export const tagTitles: Record<string, Record<string, string>> = {
     en: 'Gemini Format',
     zh: 'Gemini格式',
     ja: 'Gemini形式',
+  },
+  claude: {
+    en: 'Claude Format',
+    zh: 'Claude格式',
+    ja: 'Claude形式',
   },
   videos: {
     en: 'Videos',

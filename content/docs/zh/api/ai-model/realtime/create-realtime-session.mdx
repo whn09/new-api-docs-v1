@@ -1,5 +1,5 @@
 ---
-title: 原生OpenAI格式
+title: 实时语音对话
 full: true
 _openapi:
   method: GET
@@ -7,7 +7,7 @@ _openapi:
   structuredData:
     headings: []
     contents:
-      - content: |
+      - content: |-
           建立 WebSocket 连接用于实时对话。
 
           **注意**: 这是一个 WebSocket 端点，需要使用 WebSocket 协议连接。
@@ -22,6 +22,5 @@ _openapi:
 **注意**: 这是一个 WebSocket 端点，需要使用 WebSocket 协议连接。
 
 连接 URL 示例: `wss://api.example.com/v1/realtime?model=gpt-4o-realtime`
-
 
 <APIPage document={"./openapi/relay.json"} operations={[{"path":"/v1/realtime","method":"get"}]} />
