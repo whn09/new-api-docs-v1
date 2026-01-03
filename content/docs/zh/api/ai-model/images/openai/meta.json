@@ -1,5 +1,5 @@
 {
   "title": "原生 OpenAI 格式",
-  "pages": ["create-image", "create-image-edit"]
+  "pages": ["create-image", "create-image-edit", "v1-images-generations--post", "v1-images-edits--post"]
 }
 

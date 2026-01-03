@@ -1,6 +1,6 @@
 {
   "title": "图像",
   "icon": "Image",
-  "pages": ["openai"]
+  "pages": ["openai", "qwen", "gemini"]
 }
 
