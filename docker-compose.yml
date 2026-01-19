@@ -1,0 +1,7 @@
+services:
+  docs:
+    build: .
+    container_name: new-api-docs
+    restart: always
+    ports:
+      - "20262:3000"
